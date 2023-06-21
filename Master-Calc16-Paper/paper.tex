@@ -1,0 +1,280 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+\usepackage{booktabs} % better tables
+\usepackage{floatrow} % caption beside image
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Paper \vspace{-1ex}} % vertikalen platz weg..
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+\newcommand{\CA}{ {\cal A}}
+\newcommand{\C}[1]{ {\cal #1}}
+\newcommand{\mn}{_{\mu\nu}}
+\newcommand{\surface}{\Omega_{n+2}}
+
+\newcommand{\lesen}{ {\bf LESEN} }
+\newcommand{\Ms}{M_\star}
+\newcommand{\Ls}{L_\star}
+\newcommand{\Gs}{G_\star}
+
+\begin{multicols}{2}
+This is Paper1, coming after Calc12.
+
+{\bf Title:
+Holographic screens in ultraviolet
+self-complete quantum gravity and
+large extra dimensions
+}
+\vfill
+
+\columnbreak
+\tableofcontents
+\end{multicols}
+
+\subsection*{Abstract}
+In this paper we study the geometry and the thermodynamics of a
+{\it holographic screen} in the framework of the ultraviolet
+self-complete quantum gravity. Large extra dimensions address
+the gauge hierarchy problem and allow the effective fundamental
+scale be not far from 1 TeV. In this paper we show that
+holographic principles recently presented by
+Nicolini and Spalucci can be smoothly extended with flat,
+torodially compactified extra dimensions.
+
+\section*{Sven: Reference Guide}
+Wesentliche Vorlagen hierfür sind:
+
+\begin{itemize}
+\item Rizzo2006 \cite{Rizzo}: NC + LXD
+\item N+Spallucci \cite{NS2012, NS2013}: Holographic screens in ultraviolet self-complete quantum gravity stellen jeweils $h$ und $h_\alpha$ vor.
+\item Isi, Mureika, N \cite{Isi1,Isi2}: GUP, aber als Rahmenvorlage von N definiert
+\item Bleicher, N 2010: LXD at LHC
+\item Dickes13: No minimal length neccessary
+\end{itemize}
+
+\section{Introduction}
+Blablabla warum QG toll ist.
+
+\subsection{Ultraviolet Protection}
+Authors of [...] have shown that gravity may be self-complete:
+
+Anfangen mit \cite{Isi1}:
+\begin{equation}
+r_H = \lambda_C
+\end{equation}
+Minimal BH, dann das Holy Grail-Bild (Isi Abb 1)
+
+\subsection{The large extra-dimensions scenario}
+Ähnlich BN2010, Rizzo2006
+%
+\begin{equation}
+M_{\star}^{(2+k)} = M_P^2 / R^k
+\end{equation}
+
+Schwarzschild-Tangherlini-Metrik ansprechen
+
+\section{Self-regular black hole solutions}
+We start from the energy density for a point-particle in spherical coordinates as
+%
+\begin{equation}
+\label{eq:rho}
+\rho(r) = \frac{M}{\Omega_{n+2}~r^{n+2}} \delta(r)
+\end{equation}
+%
+where $\delta(r)$ is the Dirac delta. The energy distribution
+implies a black hole for any value of mass $M$ even for subplanckian
+values where one expects just particles.
+
+We can express the Dirac delta distribution as the derivative of
+a Heaviside step-function $\Theta$,
+\begin{equation}
+\delta(r) = \dd {\Theta(r)} r
+\end{equation}
+%
+We modify the energy distribution \eqref{eq:rho} in order to
+overcome the ambiguities of the Schwarzschild-Metrik by considering
+a ``smooth'' function $h(r)$ in place of the Heaviside step
+\begin{equation}
+\Theta(r) \to h(r)
+\end{equation}
+%
+The new profile is defined throught $h(r)$ by
+\begin{equation}
+\rho(r) = \frac M {\Omega_{n+2}~r^{n+2}} \dd {h(r)}r \equiv T_0^0
+\end{equation}
+%
+By means of the conservation equation $\nabla_\mu T^{\mu\nu} = 0$
+one can determine the remaining components of the stress tensor \cite{Rizzo}
+\begin{equation}
+\text{\it hier ausführlich machen}
+\end{equation}
+One eneds up with the metric
+\begin{equation}
+\d s^2 = - \left(1 - V(r) \right)~\d t^2
++ \left(1 - V(r) \right)^{-1}~\d r^2 
++ r^{2+n}~\d \Omega_{2+n}\dots
+\end{equation}
+with
+\begin{equation}
+V(r) =  \frac{2}{n+2} \frac{M}{\Ms^{n+2}} {\frac{1}{\Omega_{n+2}}} \frac{h(r)}{r^{n+1}}
+\end{equation}
+Carfeully making back the transition $h\to\Theta$, actually
+$h\to 1$ in the $r>0$ regime, one ends up
+with Schwarzschild-Thangerlini.
+
+If we set the mass aribitriarly
+\begin{equation}
+\label{eq:M}
+M = \frac{n+2}{2} ~\Omega_{n+2}~ \frac{1}{h(r_H)} \left( \frac{r_H}{\Ls} \right)^{n+1} ~\Ms
+\end{equation}
+
+M has the physical meaning of a mass for a spherical
+{\it holographic screen} with radius $r_H$.
+
+Eigenschaften angeben: $M=...$, Ereignishorizonte $r_h = ...$.
+
+\section{Thermodynamics, area quantization and mass spectrum}
+Temp-Plot. $T_H$, $C$ und ganz wichtig Logarithmische Entropie-Korrektur $S$.
+
+Area Quantization: Nachfragen ob ich das auch machen soll. Ist vermutlich schnell gemacht.
+
+\section{Conclusions}
+Kurzum: Nichts neues passiert.
+
+We showed that the idea of holography is compatible
+with the concept of extra dimensions in space-time.
+
+Oder
+
+We showed that the holographic principle is invariant
+under extension of spacial dimensions.
+
+
+
+
+\section{Self-regular }
+
+
+
+
+\bibliographystyle{hep}
+\bibliography{literature}{}
+%
+%\begin{thebibliography}{99}
+%\bibitem[Isi13]{isi1} Isi, Mureika, Nicolini Nov 2013
+%
+%\bibitem[Dvali]{dvali} Dvali, Gomez, "Self-Completeness of Einstein Gravity"
+%
+%\bibitem{hossi} Hossenfelder, "minimal Length Scale Scenarios for QG" Living Rev Relativity 16, 2013
+%
+%\bibitem{spallici11} Spallucci Ansoldi "Regular Black holes in UV self-complete QG" 2011
+%
+%\bibitem{spallucci} "Spallucci Smailagic  "BG production in self-complete QG" 2012
+%
+%\bibitem{hayward} "Formation and evaporation of regular BHs" 2006
+%
+%\bibitem{modesto} "LQBHs" 2006,
+%Self-dual BHs, Hossi - also ISI13 Refs[23-25]
+%  - \lesen
+%
+%\end{thebibliography}
+
+
+\end{document}

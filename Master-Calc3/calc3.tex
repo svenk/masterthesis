@@ -1,0 +1,288 @@
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+%\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc3 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\section{Schwarzschild modifications in $D$ dimensions}
+
+Consider $D$ dimensional spacetime. This is an $n=D-4$ dimensional extension to the 4-dimensional spacetime. We commonly define the greek indices $\mu,\nu,\dots=[1..4]$ for classical 4d-coordinates, big latin indices $A,B,\dots K,L,\dots=[1..D]$ for all coordinates and small latin indices $i,j,\dots=[1..n+2]$ for the angles. So a vector may be noted as $x_K = (x_0, \dots, X_D)$. In radial coordinates it can be written as $x_K = (t, r, \phi, \theta_1, \dots, \theta_{D-3})$. 
+
+We start with arbitrary $\rho(r)$, with $r$ beging the radial value of $x_K$. We derive the metric $g_{AB}$ and require SS behaviour $g_{AB}=0$  when $r\to \infty$. The Ansatz done by Rizzo is
+%
+\begin{equation}
+\d s^2 = e^\nu \d x_0^2 - e^\mu \d r^2 - r^2 \d \Omega^2_{D-2}
+\end{equation}
+%
+SS requires $e^{\nu,\mu} \to 1 \Leftrightarrow \mu=-\nu$ when $r\to\infty$. We write $e^\nu = 1 - f(r)$ and examine the $D$ dimensional conservation of energy equation, $\nabla_B  T^{AB} = 0$. {\it Now skipping all Ricci deriving stuff}.
+
+$R^i_i$ Einstein equations yield this first order ODE in $f(r)$:
+\begin{equation}
+f'(r) + \frac{n+1}{r} f(r) = \frac{1}{M_\star} \frac{2r\rho(r)}{n+2}
+\end{equation}
+with $M_\star = M_*^{n+2}$ the reduced fundamental mass scale of the theory. This can be solved for any $\rho(r)$ to
+
+\begin{equation}
+f(r) = r^{-n-1} \left(\frac{2}{(n+2)M_\star}\int_{c_1}^r (r')^{n+2} \rho (r') \, \d r' + c_2 \right) \quad\text{with } c_1, c_2 =\text{const}  \label{general-sol}
+\end{equation}
+
+Setting $c_1$ arbitrary, like $c_1=L_P$ or $c_1=0$, and $c_2=0$ to match the boundary conditions $g_{00} \xrightarrow{r\to\infty}0$, a solution is
+
+\begin{equation}
+f(r) = \frac{2}{(n+2)}\frac{m(r)}{M_\star}\frac{1}{r^{n+1}} := \frac{\mu(r)}{r^{D-3}}
+\quad\text{with}\quad m(r) = \int_{L_P}^r (r')^{n+2}\rho(r')\d r'
+\end{equation}
+
+This looks like the general Schwarzschild-Tangherlini-Solution $f(r) = \mu / r^{D-3}$ which is the $D$-dimensional SSM $f(r)=2M/r$ generalization.
+
+\subsection{Noncommutation in $D$ dim}
+
+I can insert the NSS 2006 density $\rho(r)$ into solution (\ref{general-sol}):
+
+\begin{align}
+\rho(r) &= \frac{M}{(4\pi \theta)^ {(n+3)/2}} e^{ -r^2 / 4 \theta} \\
+f(r) &= r^{-1-n} \left(c_1  - \frac{1}{M_\star}\frac{M}{(2+n) \pi^{(n+3)/2}} ~\Gamma \left(\frac{3+n}{2}; \frac{r^2}{4\theta}\right)\right) \quad \text{with } c_1 = \text{const}
+\end{align}
+
+Since $\Gamma(a,r) \xrightarrow{r\to\infty} 0$, boundary conditions are met, but our $f(r)<0$ if $c_1=0$, so we arbitrary set $c_1 = \frac{1}{M_\star}\frac{M}{(2+n) \pi^{(n+3)/2}} \Gamma\left( (3+n)/2 \right)$. This enables us writing $f(r)$ in a compact way, following Rizzo 2006 and using the identity $\gamma(a,x) + \Gamma(a,x) = \Gamma(a)$, exploiting the incomplete Gamma functions
+
+\begin{equation}
+\gamma(a,x) = \int_0^x t^{a-1} e^{-t} \d t, \quad \Gamma(a,x) = \int_x^\infty t^{a-1} e^{-t} \d t
+\end{equation}
+
+Finally I derived Rizzo 2006:
+
+\begin{equation}
+f(r) = \frac{1}{M_\star} \frac{M}{(n+2)\pi^{(n+3)/2}} \frac{1}{r^{n+1}} ~\gamma \left( \frac{n+3}{2}; \frac{r^2}{4 \theta} \right)
+\end{equation}
+
+For $\theta \to 0$ we have $\gamma(\frac{n+3}{2},x) \xrightarrow{x\to\infty} \Gamma(\frac{n+3}{2})$ which is just a constant factor.
+
+For $n\to 0$ (leaving $\theta$ as is) we end up with the not so nice
+
+\begin{equation}
+f_{\theta=0}(r) = \frac{1}{M_\star} \frac{M}{2 \pi^{3/2}} \frac{1}{r} \gamma \left( \frac{3}{2}, \frac{r^2}{4\theta}\right)
+\end{equation}
+
+%{\it TODO}: Untersuchen $\theta \to 0$ und $r\to \infty$.
+
+\subsection{Holography in $D$ dim}
+
+With the NS 2011 generalized density $\rho(r)$ to $D$ dimensions,
+
+\begin{equation}
+\rho(r) = \frac{M}{\Omega} \dd{h(r)}{r}, \quad \Omega = \Omega_{D-2}
+\end{equation}
+
+using the differential equation solution (\ref{general-sol}) we have
+
+\begin{equation}
+f(r) = r^{-n-1} \left(\frac{2 M }{M_\star (n+2) \Omega } \int_{c_1}^r  (r')^{n+2} \,\dd{h(r')}{r'} \, \d r'+c_2 \right) \quad\text{with }c_1, c_2 = \text{const} \label{hDGL}
+\end{equation}
+
+It seems that there can be made requirements for the shape of $h(r)$ based upon eq.(\ref{hDGL}). I explored a partial integration series in $n$ which probabily could tell me a maximal leading power, above which the integral no more converges. It looks like
+
+\begin{equation} \label{partiell}
+\begin{aligned}
+f(r) \propto \frac{1}{r^{n-1}} \Bigg\{
+	&\phantom{+} \left[ x^{n+2} \int_\infty^x  \d y_1 ~h'(y_1)  \right]_0^r \\
+	&- \left[ x^{n+1} \int_\infty^x \int_\infty^{y_1} \d y_1 \d y_2 ~h'(y_2)  \right]_0^r \\
+    &+ \left[ x^{n\phantom{+0}} \int_\infty^x \int_\infty^{y_1} \int_\infty^{y_2} \d y_1 \d y_2 \d y_3 ~h'(y_3)  \right]_0^r  \\
+    &- \left[ x^{n-1} \int_\infty^x \int_\infty^{y_1} \int_\infty^{y_2} \int_\infty^{y_3} \d y_1 \d y_2 \d y_3 \d y_4 ~h'(y_4)  \right]_0^r  \\
+    &\phantom{+} \dots \\
+    &+ (-1)^{(m+1)} \left[ x^{n-(m+1)} \prod_{i=1}^m  \int_\infty^{y_{i-1}} ~ h'(y_m)   \right]_0^r
+    \quad \text{in the $m$. line, with $y_0:=x$} \\
+    &\phantom{+} \dots \quad 
+  \Bigg\}
+\end{aligned}
+\end{equation}
+
+Eq (\ref{partiell}) tells me that $h(r)$ must be at least $n+2$ times integrable, and, unfortunately, one cannot state that the first line $[x^{n+2} \dots]^r_0 =  r^{n+2} h(r)$ contributes most.
+
+%Unfortunately one cannot state that the $m$. line would contribute less than the $(m-1)$. one.
+
+\subsubsection{Using $h(r) = r^2 / (r^2 + L^2)$}
+If we insert the approach  $h(r) = r^2 / (r^2 + L^2)$, we have
+
+\begin{equation}
+\begin{aligned}
+f(r) = &\frac{c_1}{r^{n+1}} + \frac{1}{r^{n+1}}\frac{2 M}{M_\star (n+2) \Omega } 
+\Bigg[ L^2 \left( \frac{1}{1+L^2} - \frac{r^{2+n}}{L^2+r^2} \right)  \\
+&- \,  _2F_1\left(1,\frac{n}{2}+1;\frac{n}{2}+2;-\frac{1}{L^2}\right) + \,
+  r^{2+n} \, _2F_1\left(1,\frac{n}{2}+1;\frac{n}{2}+2;-\frac{r^2}{L^2}\right) \Bigg]
+\end{aligned}
+\end{equation}
+
+with $_2F_1$ the hypergeometric function ${}_2F_1(a,b;c;z) = \sum_{n=0}^\infty \frac{(a)_n (b)_n}{(c)_n} \frac{z^n}{n!}$ (with Pochhammer Symbol $(x)_n = n!{x \choose n}$).
+
+%{\it TODO}: Schauen, ob $1-f(r)$ für $r\to \infty$ gegen 1 geht.
+
+A check for $n\to0$ gives
+
+\begin{equation}
+f_{n=0}(r) = \frac{L^2 M}{M_\star \Omega r} \left(
+\frac{1}{1+L^2} - \frac{r^2}{L^2 + r^2}
+- \log\left( 1 + \frac{1}{L^2} \right)
++ \log\left( 1 + \frac{r^2}{L^2} \right)
+\right)
+\end{equation}
+
+Notice the bad units e.g. in $1+1/L^2$ (so the calculation needs to be checked). Expected was something roughly like
+
+\begin{equation}
+f_{n=0}(r) = \frac{2M}{r} \rho(r) \approx
+\frac{2 M^2 \left(-\frac{10
+   r^2}{\left(L^2+r^2\right)^2}+\frac{2}{L^2+r^2}+\frac{8 r^4}{\left(L^2+r^2\right)^3}\right)}{r \Omega }
+\end{equation}
+
+
+\subsubsection{Using $h(r) = h_\alpha(r)$}
+
+The approach
+
+\begin{equation}
+h_\alpha(r) = \frac{r^3}{\left( r^\alpha + (\tilde{r}_0)^\alpha / 2 \right)^{3/\alpha}}, \quad \text{Call} \quad r_0 := \tilde{r}_0 := \tilde{r}
+\end{equation}
+
+yields something like
+
+\begin{equation}
+f(r) = c_1 r^{-n-1}+\frac{2 r^5 \left(2
+	\left(\frac{r}{\tilde{r}}\right)^\alpha
+   +1\right)^{3/\alpha }
+   \left(r^{\alpha
+   }+\frac{1}{2} \tilde{r}^{\alpha
+   }  \right)^{-3/\alpha } \,
+   _2F_1\left(\frac{3}{\alpha
+   },\frac{n+6}{\alpha
+   };\frac{n+6}{\alpha }+1;-2
+   \left(\frac{r}{\tilde{r}}\right)^\alpha   
+   \right)}{M_\star (n+2) (n+6)}
+\end{equation}
+
+The very present number 3 seems to be motivated by 3 spatial dimensions, so if we change that to $3+n$, thus considering a modified density
+
+\begin{equation}
+h_\alpha(r) = \frac{r^{(n+3)}}{\left(r^\alpha + r_0^\alpha / 2\right)^{(n+3)/\alpha}}
+\end{equation}
+
+This has the solution
+
+\begin{equation}
+f(r) = c_1 r^{-n-1}+\frac{r^{n+5} \left(2 (r/r_0)^{\alpha }
+    +1\right) \left(r^{\alpha
+   }+\frac{r_0^{\alpha
+   }}{2}\right)^{-\frac{n+3}{\alpha }} \,
+   _2F_1\left(1,\frac{n+\alpha +3}{\alpha };\frac{2
+   n+\alpha +6}{\alpha };-2 (r/r_0)^{\alpha }
+   \right)}{M_\star (n+2)
+   (n+3)}
+\end{equation}
+
+
+
+
+% Literaturangaben
+%\renewcommand{\refname}{Quellen}
+%\begin{thebibliography}{99}
+%\bibitem{Buch} W. Buckel, R. Kleiner: {\it Supraleitung}, Wiley-VHC
+%\end{thebibliography}
+\end{document}

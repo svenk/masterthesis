@@ -1,0 +1,911 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     33892,        902]
+NotebookOptionsPosition[     31878,        829]
+NotebookOutlinePosition[     32244,        845]
+CellTagsIndexPosition[     32201,        842]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Minimal Length \[LeftArrow] GUP", "Title",
+ CellChangeTimes->{{3.610806224925301*^9, 3.610806235892909*^9}}],
+
+Cell["Understand the Kempf2005-Plot", "Subtitle",
+ CellChangeTimes->{{3.6108062476625853`*^9, 3.610806252667872*^9}}],
+
+Cell["\<\
+Ich \[OpenCurlyDoubleQuote]unterdr\[UDoubleDot]cke\[CloseCurlyDoubleQuote] \
+(=weglassen) die \[CapitalDelta]-Zeichen jetzt immer, weil sie blo\[SZ] alles \
+un\[UDoubleDot]bersichtlich machen.
+Au\[SZ]erdem setze ich hquer = 1.\
+\>", "Text",
+ CellChangeTimes->{{3.610801304607328*^9, 3.610801330560364*^9}, {
+  3.610801360840252*^9, 3.6108014065856047`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Ungleichung", " ", "=", " ", 
+  RowBox[{
+   RowBox[{"x", " ", "p"}], " ", "\[GreaterEqual]", " ", 
+   RowBox[{
+    RowBox[{"1", "/", "2"}], 
+    RowBox[{"(", 
+     RowBox[{"1", " ", "+", " ", 
+      RowBox[{"\[Beta]", " ", 
+       RowBox[{"p", "^", " ", "2"}]}], " ", "+", " ", "\[Gamma]"}], 
+     ")"}]}]}]}]], "Input",
+ CellChangeTimes->{{3.6108014292229*^9, 3.610801430940886*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", " ", "x"}], "\[GreaterEqual]", 
+  RowBox[{
+   FractionBox["1", "2"], " ", 
+   RowBox[{"(", 
+    RowBox[{"1", "+", 
+     RowBox[{
+      SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+    ")"}]}]}]], "Output",
+ CellChangeTimes->{
+  3.610801432272642*^9, {3.610803722077639*^9, 3.6108037243384457`*^9}, 
+   3.610806265517233*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Aufl\[ODoubleDot]sen zu einer Funktion \[CapitalDelta]x(\[CapitalDelta]p)\
+\>", "Subsection",
+ CellChangeTimes->{{3.610801343119526*^9, 3.6108013462072563`*^9}, {
+  3.610802389873252*^9, 3.6108023919377604`*^9}}],
+
+Cell["\<\
+Deutlich einfacher (auch mit der Hand auszurechnen) ist die Umstellung nach \
+\[CapitalDelta]x. Was ich ja hier als x bezeichne:\
+\>", "Text",
+ CellChangeTimes->{{3.610802041246386*^9, 3.6108020548069887`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Reduce", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Ungleichung", " ", ",", " ", 
+     RowBox[{"x", ">", "0"}], ",", 
+     RowBox[{"p", ">", "0"}], ",", 
+     RowBox[{"\[Beta]", ">", "0"}], ",", 
+     RowBox[{"\[Gamma]", ">", "0"}]}], "}"}], ",", " ", "x", ",", " ", 
+   "Reals"}], "]"}]], "Input",
+ CellChangeTimes->{{3.61080147541873*^9, 3.6108014840147448`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"p", ">", "0"}], "&&", 
+  RowBox[{"\[Gamma]", ">", "0"}], "&&", 
+  RowBox[{"\[Beta]", ">", "0"}], "&&", 
+  RowBox[{"x", "\[GreaterEqual]", 
+   FractionBox[
+    RowBox[{"1", "+", 
+     RowBox[{
+      SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+    RowBox[{"2", " ", "p"}]]}]}]], "Output",
+ CellChangeTimes->{3.610801484343808*^9, 3.6108037244545803`*^9, 
+  3.610806265696978*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"xB", "[", 
+   RowBox[{"p_", ",", "\[Beta]_", ",", "\[Gamma]_"}], "]"}], " ", "=", " ", 
+  FractionBox[
+   RowBox[{"1", "+", 
+    RowBox[{
+     SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+   RowBox[{"2", " ", "p"}]]}]], "Input",
+ CellChangeTimes->{{3.6108018201364822`*^9, 3.610801833089822*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"1", "+", 
+   RowBox[{
+    SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+  RowBox[{"2", " ", "p"}]]], "Output",
+ CellChangeTimes->{3.6108018341317387`*^9, 3.6108037244672537`*^9, 
+  3.610806265706497*^9}]
+}, Open  ]],
+
+Cell["\<\
+Den folgenden Plot kann man auch leicht mit der Hand machen: Linearen Anteil \
+\[Beta]/2 zeichnen und 1/p^2-Anteil draufaddieren.\
+\>", "Text",
+ CellChangeTimes->{{3.610802059303594*^9, 3.610802103313773*^9}, {
+  3.61081015409708*^9, 3.6108101550716057`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"Show", "@@", 
+    RowBox[{"Reverse", "@", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"xB", "[", 
+          RowBox[{"p", ",", "\[Beta]", ",", "\[Gamma]"}], "]"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", "0", ",", "5"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotRange", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{"0", ",", "6"}], "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"PlotStyle", "\[Rule]", "Thick"}]}], "\[IndentingNewLine]", 
+        "]"}], ",", "\[IndentingNewLine]", 
+       RowBox[{"RegionPlot", "[", "\[IndentingNewLine]", 
+        RowBox[{"(*", " ", 
+         RowBox[{
+          RowBox[{
+          "Es", " ", "scheint", " ", "ein", " ", "komischer", " ", "Bug", " ",
+            "in", " ", "RegionPlot", " ", "zu", " ", "sein"}], ",", " ", 
+          RowBox[{"dass", " ", 
+           RowBox[{"Evaluate", "@", "Ungleichung"}], "\[IndentingNewLine]", 
+           "  ", "hier", " ", "nicht", " ", "funktioniert"}]}], " ", "*)"}], 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"p", " ", "x"}], " ", "\[GreaterEqual]", " ", 
+          RowBox[{
+           RowBox[{"1", "/", "2"}], 
+           RowBox[{"(", 
+            RowBox[{"1", "+", " ", 
+             RowBox[{"\[Beta]", " ", 
+              RowBox[{"p", "^", "2"}]}], " ", "+", " ", "\[Gamma]"}], 
+            ")"}]}]}], ",", " ", 
+         RowBox[{"{", 
+          RowBox[{"p", ",", "0", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"x", ",", "0", ",", "6"}], "}"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"BoundaryStyle", "\[Rule]", " ", "None"}], ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+          "Der", " ", "Punkt", " ", "oben", " ", "wird", " ", "irgendwie", 
+           " ", 
+           RowBox[{"ueberzeichnet", " ", ":", 
+            RowBox[{"-", 
+             RowBox[{"(", " "}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+         RowBox[{"Epilog", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{"Red", ",", 
+            RowBox[{"Disk", "[", 
+             RowBox[{
+              RowBox[{"{", 
+               RowBox[{
+                RowBox[{"MinimumP", "[", 
+                 RowBox[{"\[Beta]", ",", "\[Gamma]"}], "]"}], ",", 
+                RowBox[{"MinimumX", "[", 
+                 RowBox[{"\[Beta]", ",", "\[Gamma]"}], "]"}]}], "}"}], ",", 
+              "0.15"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+         RowBox[{"Frame", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+         RowBox[{"AxesLabel", " ", "\[Rule]", " ", 
+          RowBox[{"{", 
+           RowBox[{
+           "\"\<\[CapitalDelta]p\>\"", ",", "\"\<\[CapitalDelta]x\>\""}], 
+           "}"}]}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+         "PlotLabel", "\[Rule]", " ", 
+          "\"\<Minimal Length: \[CapitalDelta]x\>\""}]}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}]}]}], ",",
+    "\[IndentingNewLine]", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0.84"}], "}"}], ",", "0", ",", "3"}], "}"}], 
+   ",", "\[IndentingNewLine]", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Gamma]", ",", "0.175"}], "}"}], ",", "0", ",", "3"}], 
+    "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.610801890688588*^9, 3.610802008314254*^9}, {
+  3.610802318379138*^9, 3.610802358955989*^9}, {3.6108028643557997`*^9, 
+  3.610802907602879*^9}, {3.610802953403263*^9, 3.6108029605177794`*^9}, {
+  3.6108030059252357`*^9, 3.61080302462245*^9}, {3.610803056303069*^9, 
+  3.6108031743093767`*^9}, {3.6108032230807743`*^9, 3.610803230880886*^9}, {
+  3.610803843215765*^9, 3.610803868767605*^9}, {3.6108039511913843`*^9, 
+  3.610803953663445*^9}, {3.610806406878501*^9, 3.610806416113194*^9}, {
+  3.610806699392631*^9, 3.6108067184216757`*^9}, {3.61080734622933*^9, 
+  3.610807431800679*^9}, {3.610807462272304*^9, 3.610807586513624*^9}, {
+  3.610807624437497*^9, 3.6108076527682123`*^9}, {3.61080988670127*^9, 
+  3.6108098979791822`*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`\[Beta]$$ = 1.335, $CellContext`\[Gamma]$$ =
+     0.24, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Beta]$$], 0.84}, 0, 3}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.175}, 0, 3}}, Typeset`size$$ = {
+    450., {238., 245.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Beta]$17017$$ = 
+    0, $CellContext`\[Gamma]$17018$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`\[Beta]$$ = 0.84, $CellContext`\[Gamma]$$ = 
+        0.175}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$17017$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$17018$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Apply[Show, 
+        Reverse[{
+          Plot[
+           $CellContext`xB[$CellContext`p, $CellContext`\[Beta]$$, \
+$CellContext`\[Gamma]$$], {$CellContext`p, 0, 5}, PlotRange -> {0, 6}, 
+           ImageSize -> Medium, PlotStyle -> Thick], 
+          
+          RegionPlot[$CellContext`p $CellContext`x >= (1/2) (
+             1 + $CellContext`\[Beta]$$ $CellContext`p^2 + $CellContext`\
+\[Gamma]$$), {$CellContext`p, 0, 5}, {$CellContext`x, 0, 6}, BoundaryStyle -> 
+           None, Epilog -> {Red, 
+             Disk[{
+               $CellContext`MinimumP[$CellContext`\[Beta]$$, $CellContext`\
+\[Gamma]$$], 
+               $CellContext`MinimumX[$CellContext`\[Beta]$$, $CellContext`\
+\[Gamma]$$]}, 0.15]}, Axes -> True, Frame -> None, 
+           AxesLabel -> {"\[CapitalDelta]p", "\[CapitalDelta]x"}, PlotLabel -> 
+           "Minimal Length: \[CapitalDelta]x"]}]], 
+      "Specifications" :> {{{$CellContext`\[Beta]$$, 0.84}, 0, 
+         3}, {{$CellContext`\[Gamma]$$, 0.175}, 0, 3}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{507., {306., 313.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.6108019167282887`*^9, 3.6108019217929068`*^9}, {
+   3.610801953023278*^9, 3.610802008495256*^9}, {3.610802341950313*^9, 
+   3.6108023595652037`*^9}, {3.610802954721477*^9, 3.610802960813579*^9}, {
+   3.610803007044607*^9, 3.610803025566661*^9}, {3.610803058460205*^9, 
+   3.610803174691461*^9}, 3.610803724594976*^9, {3.610803847115913*^9, 
+   3.6108038693841267`*^9}, 3.610803954152619*^9, 3.6108062657626467`*^9, 
+   3.610806417375136*^9, 3.6108073586448393`*^9, 3.610807463236146*^9, {
+   3.6108074940024347`*^9, 3.610807525661993*^9}, {3.610807558321519*^9, 
+   3.610807586903981*^9}, {3.61080762763759*^9, 3.610807653451796*^9}, {
+   3.610809894595087*^9, 3.610809898319002*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Aufl\[ODoubleDot]sen zu einer Funktion \[CapitalDelta]p(\[CapitalDelta]x)\
+\>", "Subsection",
+ CellChangeTimes->{{3.610801351776843*^9, 3.610801356128443*^9}, {
+  3.6108023842562857`*^9, 3.610802387489184*^9}}],
+
+Cell["\<\
+Diese Umformung kann man mit der Hand machen, wenn man die pq-Formel aus der \
+7. Klasse benutzt :-)\
+\>", "Text",
+ CellChangeTimes->{{3.610802125406869*^9, 3.610802140702839*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Reduce", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Ungleichung", " ", ",", " ", 
+     RowBox[{"x", ">", "0"}], ",", 
+     RowBox[{"p", ">", "0"}], ",", 
+     RowBox[{"\[Beta]", ">", "0"}], ",", 
+     RowBox[{"\[Gamma]", ">", "0"}]}], "}"}], ",", " ", "p", ",", " ", 
+   "Reals"}], "]"}]], "Input",
+ CellChangeTimes->{{3.610799408093624*^9, 3.610799464861597*^9}, {
+  3.610801410139813*^9, 3.6108014508314247`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"x", ">", "0"}], "&&", 
+  RowBox[{"\[Gamma]", ">", "0"}], "&&", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"0", "<", "\[Beta]", "<", 
+       FractionBox[
+        SuperscriptBox["x", "2"], 
+        RowBox[{"1", "+", "\[Gamma]"}]]}], "&&", 
+      RowBox[{
+       RowBox[{
+        FractionBox["x", "\[Beta]"], "-", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["x", "2"], "-", "\[Beta]", "-", 
+           RowBox[{"\[Beta]", " ", "\[Gamma]"}]}], 
+          SuperscriptBox["\[Beta]", "2"]]]}], "\[LessEqual]", "p", 
+       "\[LessEqual]", 
+       RowBox[{
+        FractionBox["x", "\[Beta]"], "+", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["x", "2"], "-", "\[Beta]", "-", 
+           RowBox[{"\[Beta]", " ", "\[Gamma]"}]}], 
+          SuperscriptBox["\[Beta]", "2"]]]}]}]}], ")"}], "||", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"\[Beta]", "\[Equal]", 
+       FractionBox[
+        SuperscriptBox["x", "2"], 
+        RowBox[{"1", "+", "\[Gamma]"}]]}], "&&", 
+      RowBox[{"p", "\[Equal]", 
+       RowBox[{
+        FractionBox["x", "\[Beta]"], "-", 
+        SqrtBox[
+         FractionBox[
+          RowBox[{
+           SuperscriptBox["x", "2"], "-", "\[Beta]", "-", 
+           RowBox[{"\[Beta]", " ", "\[Gamma]"}]}], 
+          SuperscriptBox["\[Beta]", "2"]]]}]}]}], ")"}]}], ")"}]}]], "Output",\
+
+ CellChangeTimes->{
+  3.610799426258566*^9, 3.610799465424391*^9, {3.610801417376379*^9, 
+   3.6108014513730907`*^9}, 3.610803724742291*^9, 3.610806265903*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{"sign", ":", " ", 
+    RowBox[{
+     RowBox[{"Entweder", " ", "ein", " ", "Minus", " ", 
+      RowBox[{"(", 
+       RowBox[{"-", "1"}], ")"}], " ", "oder", " ", "Plus", " ", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"+", "1"}], ")"}], ".", " ", "Standard"}], " ", "ist"}], " ", 
+     "+", "1"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{
+   RowBox[{"pB", "[", 
+    RowBox[{"x_", ",", "\[Beta]_", ",", "\[Gamma]_", ",", 
+     RowBox[{"sign_:", "+", "1"}]}], "]"}], " ", "=", " ", 
+   RowBox[{
+    FractionBox["x", "\[Beta]"], "+", 
+    RowBox[{"sign", " ", 
+     SqrtBox[
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["x", "2"], "-", "\[Beta]", "-", 
+        RowBox[{"\[Beta]", " ", "\[Gamma]"}]}], 
+       SuperscriptBox["\[Beta]", "2"]]]}]}]}]}]], "Input",
+ CellChangeTimes->{{3.6107994871804543`*^9, 3.610799504259375*^9}, {
+   3.610800963596513*^9, 3.6108009750259247`*^9}, {3.6108012939714193`*^9, 
+   3.610801294240155*^9}, 3.610801421747148*^9, {3.610801455802712*^9, 
+   3.61080146827439*^9}, {3.61080166111754*^9, 3.610801667771736*^9}, {
+   3.610804090181513*^9, 3.610804095263769*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  FractionBox["x", "\[Beta]"], "+", 
+  RowBox[{"sign", " ", 
+   SqrtBox[
+    FractionBox[
+     RowBox[{
+      SuperscriptBox["x", "2"], "-", "\[Beta]", "-", 
+      RowBox[{"\[Beta]", " ", "\[Gamma]"}]}], 
+     SuperscriptBox["\[Beta]", "2"]]]}]}]], "Output",
+ CellChangeTimes->{3.6108006581365128`*^9, 3.610801295635086*^9, 
+  3.6108014233006897`*^9, 3.61080146971472*^9, 3.610801668867228*^9, 
+  3.6108037247478313`*^9, 3.610804096083742*^9, 3.610806265929325*^9}]
+}, Open  ]],
+
+Cell["\<\
+Den folgenden Plot hat Herr Kempf in sein wohlbekanntes Paper aus 2005 \
+reingepackt. Er entsteht durch Achsenspiegelung (p=x) von obigem Graphen. \
+Eigentlich war das hier eine aufwendige Methode, die Umkehrfunktion zu \
+bestimmen.
+Eigentlich gibt es einiges zu sagen: Weil es keine eindeutige Umkehrfunktion \
+gibt, ist das entweder eine Relation oder obige Funktion pB einmal mit \
+sign=+1 und sign=-1 geplottet.
+Ich hab au\[SZ]erdem den extremen \[CapitalDelta]x-Wert als roten Strich \
+kenntlich gemacht. Der schattierte Bereich ist wieder der physikalisch \
+erlaubte.\
+\>", "Text",
+ CellChangeTimes->{{3.610802171007588*^9, 3.6108021861355047`*^9}, {
+  3.6108099463719187`*^9, 3.6108100279985323`*^9}, {3.610810161287814*^9, 
+  3.6108101848630257`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"+", "1"}], ")"}], " ", "ist", " ", "Orange"}], ",", " ", 
+    RowBox[{
+     RowBox[{"(", 
+      RowBox[{"-", "1"}], ")"}], " ", "ist", " ", 
+     RowBox[{"Minus", "."}]}]}], " ", "*)"}], "\[IndentingNewLine]", 
+  RowBox[{"Manipulate", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"Show", "@@", 
+     RowBox[{"Reverse", "@", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Plot", "[", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Evaluate", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"pB", "[", 
+              RowBox[{"x", ",", "\[Beta]", ",", "\[Gamma]", ",", "#"}], "]"}],
+              "&"}], "/@", 
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"+", "1"}], ",", 
+              RowBox[{"-", "1"}]}], "}"}]}], "]"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", "10"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"PlotRange", " ", "\[Rule]", " ", 
+           RowBox[{"{", 
+            RowBox[{"0", ",", "10"}], "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"ImageSize", "\[Rule]", "Medium"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"PlotStyle", "\[Rule]", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Directive", "[", 
+               RowBox[{"#", ",", "Thick"}], "]"}], "&"}], "/@", 
+             RowBox[{"{", 
+              RowBox[{"Orange", ",", "Blue"}], "}"}]}], ")"}]}]}], 
+         "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"RegionPlot", "[", "\[IndentingNewLine]", 
+         RowBox[{"(*", " ", 
+          RowBox[{
+           RowBox[{
+           "Es", " ", "scheint", " ", "ein", " ", "komischer", " ", "Bug", 
+            " ", "in", " ", "RegionPlot", " ", "zu", " ", "sein"}], ",", " ", 
+           
+           RowBox[{"dass", " ", 
+            RowBox[{"Evaluate", "@", "Ungleichung"}], "\[IndentingNewLine]", 
+            "  ", "hier", " ", "nicht", " ", "funktioniert"}]}], " ", "*)"}], 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"p", " ", "x"}], " ", "\[GreaterEqual]", " ", 
+           RowBox[{
+            RowBox[{"1", "/", "2"}], 
+            RowBox[{"(", 
+             RowBox[{"1", "+", " ", 
+              RowBox[{"\[Beta]", " ", 
+               RowBox[{"p", "^", "2"}]}], " ", "+", " ", "\[Gamma]"}], 
+             ")"}]}]}], ",", " ", 
+          RowBox[{"{", 
+           RowBox[{"x", ",", "0", ",", "10"}], "}"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"p", ",", "0", ",", "10"}], "}"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"BoundaryStyle", "\[Rule]", " ", "None"}], ",", 
+          "\[IndentingNewLine]", 
+          RowBox[{"(*", " ", 
+           RowBox[{
+           "Der", " ", "Punkt", " ", "oben", " ", "wird", " ", "irgendwie", 
+            " ", 
+            RowBox[{"ueberzeichnet", " ", ":", 
+             RowBox[{"-", 
+              RowBox[{"(", " "}]}]}]}], "*)"}], "\[IndentingNewLine]", 
+          RowBox[{"Epilog", "\[Rule]", " ", 
+           RowBox[{"{", 
+            RowBox[{"Red", ",", 
+             RowBox[{"Disk", "[", 
+              RowBox[{
+               RowBox[{"{", 
+                RowBox[{
+                 RowBox[{"MinimumX", "[", 
+                  RowBox[{"\[Beta]", ",", "\[Gamma]"}], "]"}], ",", 
+                 RowBox[{"MinimumP", "[", 
+                  RowBox[{"\[Beta]", ",", "\[Gamma]"}], "]"}]}], "}"}], ",", 
+               "0.15"}], "]"}]}], "}"}]}], ",", "\[IndentingNewLine]", 
+          RowBox[{"Axes", "\[Rule]", "True"}], ",", 
+          RowBox[{"Frame", "\[Rule]", "None"}], ",", "\[IndentingNewLine]", 
+          RowBox[{"AxesLabel", " ", "\[Rule]", " ", 
+           RowBox[{"{", 
+            RowBox[{
+            "\"\<\[CapitalDelta]x\>\"", ",", "\"\<\[CapitalDelta]p\>\""}], 
+            "}"}]}], ",", " ", 
+          RowBox[{"(*", " ", 
+           RowBox[{"WERDEN", " ", "VERGESSEN"}], " ", "*)"}], 
+          "\[IndentingNewLine]", 
+          RowBox[{
+          "PlotLabel", "\[Rule]", " ", 
+           "\"\<Minimal Length: \[CapitalDelta]p\>\""}]}], 
+         "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "}"}]}]}], 
+    ",", "\[IndentingNewLine]", " ", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Beta]", ",", "0.84"}], "}"}], ",", "0", ",", "3"}], "}"}], 
+    ",", "\[IndentingNewLine]", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"\[Gamma]", ",", "0.175"}], "}"}], ",", "0", ",", "3"}], 
+     "}"}]}], "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0E8ow3EABfD1o3AYbaLZIrTD0FArZS6UabQitcNazagZ7bAlMaHEckC/
+5cBkDg5k+ZMssTW/NWua2RgpSSS2wmhOkrWDve/h9Tm9d3gVfcZuHcVisQSZ
+wIsUz8B+S7Q4ov2j8CWvahwGat2T0L//bCUa/og8vscG6SapHWp+55wwreW4
+YOhu3gdP1v1nZHeXy8lHz3ssgN6HsXLoZH6ILvWlEC7cx0WQckxJ4YRJ3Apl
+UqEcXouK26FRed4JV7LNvVDR2KyDDkFcD+sTwQNYpkkewnRNjxtG+F8eaPnI
+CUCJhAnChr1SXkHGz9gmcYTWWqB8aWcWzmx801B1pbXCYRl7GQ6Zw8RUV8kR
+XIzpibRSFYIdW3URmBV9f4TbVPUTXFPnFnLwL0MVQQV/+hQOOFeDMCW8CUPT
+q/gW2toqGW7GQXvSB/8BmgLixg==
+  "]],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`\[Beta]$$ = 0.84, $CellContext`\[Gamma]$$ = 
+    0.175, Typeset`show$$ = True, Typeset`bookmarkList$$ = {}, 
+    Typeset`bookmarkMode$$ = "Menu", Typeset`animator$$, Typeset`animvar$$ = 
+    1, Typeset`name$$ = "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Beta]$$], 0.84}, 0, 3}, {{
+       Hold[$CellContext`\[Gamma]$$], 0.175}, 0, 3}}, Typeset`size$$ = {
+    450., {234., 242.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Beta]$16808$$ = 
+    0, $CellContext`\[Gamma]$16809$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`\[Beta]$$ = 0.84, $CellContext`\[Gamma]$$ = 
+        0.175}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$16808$$, 0], 
+        Hold[$CellContext`\[Gamma]$$, $CellContext`\[Gamma]$16809$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Apply[Show, 
+        Reverse[{
+          Plot[
+           Evaluate[
+            
+            Map[$CellContext`pB[$CellContext`x, $CellContext`\[Beta]$$, \
+$CellContext`\[Gamma]$$, #]& , {
+              Plus[1], -1}]], {$CellContext`x, 0, 10}, PlotRange -> {0, 10}, 
+           ImageSize -> Medium, PlotStyle -> 
+           Map[Directive[#, Thick]& , {Orange, Blue}]], 
+          
+          RegionPlot[$CellContext`p $CellContext`x >= (1/2) (
+             1 + $CellContext`\[Beta]$$ $CellContext`p^2 + $CellContext`\
+\[Gamma]$$), {$CellContext`x, 0, 10}, {$CellContext`p, 0, 10}, BoundaryStyle -> 
+           None, Epilog -> {Red, 
+             Disk[{
+               $CellContext`MinimumX[$CellContext`\[Beta]$$, $CellContext`\
+\[Gamma]$$], 
+               $CellContext`MinimumP[$CellContext`\[Beta]$$, $CellContext`\
+\[Gamma]$$]}, 0.15]}, Axes -> True, Frame -> None, 
+           AxesLabel -> {"\[CapitalDelta]x", "\[CapitalDelta]p"}, PlotLabel -> 
+           "Minimal Length: \[CapitalDelta]p"]}]], 
+      "Specifications" :> {{{$CellContext`\[Beta]$$, 0.84}, 0, 
+         3}, {{$CellContext`\[Gamma]$$, 0.175}, 0, 3}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{507., {303., 310.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.610800863068173*^9, 3.6108008674694777`*^9}, {
+   3.6108015448738823`*^9, 3.6108015508885508`*^9}, {3.610801617798449*^9, 
+   3.610801631682746*^9}, {3.610801670330022*^9, 3.61080169187323*^9}, 
+   3.61080172676163*^9, 3.610802373694119*^9, {3.610803236257976*^9, 
+   3.610803254539854*^9}, 3.610803323473728*^9, 3.61080338288986*^9, {
+   3.610803633386084*^9, 3.61080363561651*^9}, {3.610803698491972*^9, 
+   3.6108037248023367`*^9}, {3.610803789146865*^9, 3.610803810573042*^9}, 
+   3.610803946763646*^9, 3.610804121017725*^9, 3.6108041807515783`*^9, 
+   3.610804246936756*^9, 3.610806265962047*^9, 3.610806440822852*^9, {
+   3.6108078414259443`*^9, 3.61080786918062*^9}, {3.610807907457933*^9, 
+   3.610807953465191*^9}, {3.6108098345392303`*^9, 3.610809863774325*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Das kleinstm\[ODoubleDot]gliche \[CapitalDelta]x und \[CapitalDelta]p finden\
+\>", "Subsection",
+ CellChangeTimes->{{3.61080136712114*^9, 3.6108013697826843`*^9}, {
+  3.610801744074473*^9, 3.6108017540430307`*^9}, {3.6108023809056387`*^9, 
+  3.6108023815225153`*^9}, {3.610806635868206*^9, 3.610806638815928*^9}}],
+
+Cell["Minimum durch Ableiten finden:", "Text",
+ CellChangeTimes->{{3.610802243008851*^9, 3.610802246527676*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"xB", "[", 
+  RowBox[{"p", ",", "\[Beta]", ",", "\[Gamma]"}], 
+  "]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"DxB", "[", 
+    RowBox[{"p_", ",", "\[Beta]_", ",", "\[Gamma]_"}], "]"}], " ", "=", " ", 
+   RowBox[{"D", "[", 
+    RowBox[{
+     RowBox[{"xB", "[", 
+      RowBox[{"p", ",", "\[Beta]", ",", "\[Gamma]"}], "]"}], ",", "p"}], 
+    "]"}]}], " ", "\[IndentingNewLine]", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+    RowBox[{"Solve", " ", "ginge", " ", "auch"}], ",", " ", 
+    RowBox[{
+    "gibt", " ", "aber", " ", "nicht", " ", "die", " ", "ganzen", " ", 
+     "Bedingungen", " ", 
+     RowBox[{"aus", "!"}]}]}], " ", "*)"}]}], "\[IndentingNewLine]", 
+ RowBox[{"Reduce", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"DxB", "[", 
+     RowBox[{"p", ",", "\[Beta]", ",", "\[Gamma]"}], "]"}], " ", "\[Equal]", 
+    " ", "0"}], ",", "p"}], "]"}]}], "Input",
+ CellChangeTimes->{{3.610802212486602*^9, 3.610802234190764*^9}, {
+  3.6108034429155293`*^9, 3.610803443268971*^9}, {3.61080352752503*^9, 
+  3.610803529428903*^9}, {3.610804310736055*^9, 3.6108043224881897`*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{"1", "+", 
+   RowBox[{
+    SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+  RowBox[{"2", " ", "p"}]]], "Output",
+ CellChangeTimes->{{3.610802217655889*^9, 3.610802234615218*^9}, 
+   3.610803443729744*^9, 3.610803530353229*^9, 3.610803724916914*^9, {
+   3.61080431603478*^9, 3.610804323265423*^9}, 3.6108062660694103`*^9}],
+
+Cell[BoxData[
+ RowBox[{"\[Beta]", "-", 
+  FractionBox[
+   RowBox[{"1", "+", 
+    RowBox[{
+     SuperscriptBox["p", "2"], " ", "\[Beta]"}], "+", "\[Gamma]"}], 
+   RowBox[{"2", " ", 
+    SuperscriptBox["p", "2"]}]]}]], "Output",
+ CellChangeTimes->{{3.610802217655889*^9, 3.610802234615218*^9}, 
+   3.610803443729744*^9, 3.610803530353229*^9, 3.610803724916914*^9, {
+   3.61080431603478*^9, 3.610804323265423*^9}, 3.610806266071228*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"\[Gamma]", "\[Equal]", 
+     RowBox[{"-", "1"}]}], "&&", 
+    RowBox[{"\[Beta]", "\[Equal]", "0"}], "&&", 
+    RowBox[{"p", "\[NotEqual]", "0"}]}], ")"}], "||", 
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"\[Beta]", "\[NotEqual]", "0"}], "&&", 
+    RowBox[{"(", 
+     RowBox[{
+      RowBox[{"p", "\[Equal]", 
+       RowBox[{"-", 
+        FractionBox[
+         SqrtBox[
+          RowBox[{"1", "+", "\[Gamma]"}]], 
+         SqrtBox["\[Beta]"]]}]}], "||", 
+      RowBox[{"p", "\[Equal]", 
+       FractionBox[
+        SqrtBox[
+         RowBox[{"1", "+", "\[Gamma]"}]], 
+        SqrtBox["\[Beta]"]]}]}], ")"}], "&&", 
+    RowBox[{"p", "\[NotEqual]", "0"}]}], ")"}]}]], "Output",
+ CellChangeTimes->{{3.610802217655889*^9, 3.610802234615218*^9}, 
+   3.610803443729744*^9, 3.610803530353229*^9, 3.610803724916914*^9, {
+   3.61080431603478*^9, 3.610804323265423*^9}, 3.6108062661221657`*^9}]
+}, Open  ]],
+
+Cell["\<\
+Dies sind nun die minimal m\[ODoubleDot]glichen Werte f\[UDoubleDot]r \
+\[CapitalDelta]p und \[CapitalDelta]x, die aus der ver\[ADoubleDot]nderten \
+GUP herauskommen:\
+\>", "Text",
+ CellChangeTimes->{{3.6108039770339537`*^9, 3.610803983217599*^9}, {
+  3.610806581437422*^9, 3.610806600345964*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"MinimumP", "[", 
+   RowBox[{"\[Beta]_", ",", "\[Gamma]_"}], "]"}], "=", 
+  FractionBox[
+   SqrtBox[
+    RowBox[{"1", "+", "\[Gamma]"}]], 
+   SqrtBox["\[Beta]"]]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"MinimumX", "[", 
+   RowBox[{"\[Beta]_", ",", "\[Gamma]_"}], "]"}], " ", "=", " ", 
+  RowBox[{"xB", "[", 
+   RowBox[{
+    RowBox[{"MinimumP", "[", 
+     RowBox[{"\[Beta]", ",", "\[Gamma]"}], "]"}], ",", "\[Beta]", ",", 
+    "\[Gamma]"}], "]"}]}]}], "Input",
+ CellChangeTimes->{{3.61080227572655*^9, 3.6108022813547363`*^9}, {
+   3.6108024356253*^9, 3.610802464387582*^9}, 3.6108026574101562`*^9, {
+   3.610802732652977*^9, 3.610802740828973*^9}, {3.610804023858481*^9, 
+   3.610804036489976*^9}, {3.610806357030221*^9, 3.610806387483403*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  SqrtBox[
+   RowBox[{"1", "+", "\[Gamma]"}]], 
+  SqrtBox["\[Beta]"]]], "Output",
+ CellChangeTimes->{
+  3.610802449655293*^9, 3.610802658026231*^9, {3.6108027414366007`*^9, 
+   3.6108027495921907`*^9}, 3.610803724951803*^9, {3.610804024417886*^9, 
+   3.610804037000202*^9}, 3.610806266146401*^9, {3.610806359069964*^9, 
+   3.610806388072134*^9}}],
+
+Cell[BoxData[
+ FractionBox[
+  RowBox[{
+   SqrtBox["\[Beta]"], " ", 
+   RowBox[{"(", 
+    RowBox[{"2", "+", 
+     RowBox[{"2", " ", "\[Gamma]"}]}], ")"}]}], 
+  RowBox[{"2", " ", 
+   SqrtBox[
+    RowBox[{"1", "+", "\[Gamma]"}]]}]]], "Output",
+ CellChangeTimes->{
+  3.610802449655293*^9, 3.610802658026231*^9, {3.6108027414366007`*^9, 
+   3.6108027495921907`*^9}, 3.610803724951803*^9, {3.610804024417886*^9, 
+   3.610804037000202*^9}, 3.610806266146401*^9, {3.610806359069964*^9, 
+   3.6108063880738497`*^9}}]
+}, Open  ]],
+
+Cell[TextData[{
+ "Diese Koordinate ",
+ Cell[BoxData[
+  FormBox[
+   RowBox[{"(", 
+    RowBox[{
+     SubscriptBox["\[CapitalDelta]x", "min"], ",", 
+     SubscriptBox["\[CapitalDelta]p", "min"]}], ")"}], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " sind als rote Punkte in die obigen Graphen eingezeichnet (ggf. muss das \
+Notebook mehrmals evaluiert werden, falls nicht angezeigt)."
+}], "Text",
+ CellChangeTimes->{{3.6108066046383543`*^9, 3.610806616570908*^9}, {
+  3.610810079625537*^9, 3.610810133085682*^9}}]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1600, 876},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+Magnification:>1.25 Inherited,
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 114, 1, 116, "Title"],
+Cell[696, 25, 117, 1, 64, "Subtitle"],
+Cell[816, 28, 367, 7, 65, "Text"],
+Cell[CellGroupData[{
+Cell[1208, 39, 408, 11, 38, "Input"],
+Cell[1619, 52, 382, 12, 56, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2038, 69, 222, 4, 56, "Subsection"],
+Cell[2263, 75, 220, 4, 39, "Text"],
+Cell[CellGroupData[{
+Cell[2508, 83, 393, 10, 38, "Input"],
+Cell[2904, 95, 432, 12, 63, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3373, 112, 350, 9, 70, "Input"],
+Cell[3726, 123, 260, 7, 63, "Output"]
+}, Open  ]],
+Cell[4001, 133, 269, 5, 39, "Text"],
+Cell[CellGroupData[{
+Cell[4295, 142, 4422, 100, 564, "Input"],
+Cell[8720, 244, 3355, 62, 639, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[12124, 312, 220, 4, 56, "Subsection"],
+Cell[12347, 318, 190, 4, 38, "Text"],
+Cell[CellGroupData[{
+Cell[12562, 326, 443, 11, 38, "Input"],
+Cell[13008, 339, 1607, 48, 78, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[14652, 392, 1183, 29, 122, "Input"],
+Cell[15838, 423, 489, 12, 74, "Output"]
+}, Open  ]],
+Cell[16342, 438, 769, 14, 117, "Text"],
+Cell[CellGroupData[{
+Cell[17136, 456, 5206, 128, 589, "Input"],
+Cell[22345, 586, 3572, 67, 633, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25966, 659, 323, 5, 56, "Subsection"],
+Cell[26292, 666, 112, 1, 38, "Text"],
+Cell[CellGroupData[{
+Cell[26429, 671, 1104, 28, 114, "Input"],
+Cell[27536, 701, 376, 8, 63, "Output"],
+Cell[27915, 711, 433, 10, 65, "Output"],
+Cell[28351, 723, 944, 27, 71, "Output"]
+}, Open  ]],
+Cell[29310, 753, 307, 6, 39, "Text"],
+Cell[CellGroupData[{
+Cell[29642, 763, 786, 19, 113, "Input"],
+Cell[30431, 784, 374, 9, 71, "Output"],
+Cell[30808, 795, 507, 14, 71, "Output"]
+}, Open  ]],
+Cell[31330, 812, 520, 13, 41, "Text"]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

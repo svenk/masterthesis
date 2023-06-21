@@ -1,0 +1,192 @@
+\documentclass[10pt,a4paper, fleqn]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage[american]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+\usepackage{subcaption} % subfigures
+\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+\usepackage{booktabs} % better tables
+\usepackage{floatrow} % caption beside image
+\usepackage[toc,page]{appendix}
+\usepackage{mathtools} % ceil, floor
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usepackage[usenames,dvipsnames]{color} % more colors
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+\usepackage{titlesec}
+\titleformat{\section}{\normalsize\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+  
+% Hübsche Boxen
+% Alternative dazu (gut fuer Seitenanmerkungen):
+% http://tex.stackexchange.com/a/73418/49958
+% \usepackage[draft]{todonotes}   % notes showed
+\usepackage{mdframed}
+\mdfdefinestyle{todo}{
+	linecolor=red,
+	backgroundcolor=yellow!40,
+	linewidth=5pt,
+	topline=false,
+	rightline=false,
+	bottomline=false
+}
+% definiere \begin{todo} und \todo{blabla} auf einmal:
+\usepackage{environ}
+\NewEnviron{todo}%[1]
+  {\begin{mdframed}[style=todo]
+  	 \BODY
+   \end{mdframed}\vspace{.3cm}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, summary writeup (after Calc15b)},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace*{-9ex} Master Thesis Summary \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://fias.uni-frankfurt.de/~koeppel}{Sven Köppel}\vspace{-1ex}}
+\date{\small Generation date: \today, \currenttime}
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+\newcommand{\CA}{ {\cal A}}
+\newcommand{\C}[1]{ {\cal #1}}
+\newcommand{\mn}{_{\mu\nu}}
+
+% colored symbols:
+% http://tex.stackexchange.com/questions/85033/colored-symbols
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+% In Text: $a\textcolor{red}{\ast}b$
+% In Math: $a\mathcolor{red}{\ast}b$
+\newcommand{\redmin}{\mathcolor{red}{-}}
+\newcommand{\redplus}{\mathcolor{red}{+}}
+\newcommand{\pn}{\mathcolor{OliveGreen}{+ n}}
+\newcommand{\n}{ {\mathcolor{OliveGreen}{n}} }
+
+
+%%%%%%%%%%%%%%%%% BEGIN DOCUMENT %%%%%%%%%%%%%%%%%%%%%%%%%%
+
+From September 2013 -- Sept. 2014, I studied Black Holes at the Planck Scales as candidates for effective Quantum Gravity models.
+
+\section*{Schwarzschild-like Black holes as basic building block}
+Most approaches were inspired by »smearing« the Dirac Delta distribution in the Schwarzschild solution. The (exterior) Schwarzschild metric solves the single-point of matter source problem and as is one of the simplest solutions of Einsteins Equations. Due to the point-like density, it exhibits radial symmetry. The smearing operation retains this symmetry. Therefore, with all my matter densities as starting points, Einstein Equations are exactly solvable, that is, without help of numerical tools.
+
+After solving Einsteins Equations and thus finding a metric, Black Hole properties can be calculated: The horizon structure and thermodynamical properties like the Hawking Temperature, the Heat Capacity or the Entropy -- quantities which give insight to the dynamical evolution of the black hole. When tracing the evaporation of a quantum sized black hole, all my models possess a configuration which ends up in a »remnant«, that is, a stable non-evaporating BH configuration. This is the point where discussions about the particle and black hole duality arise. Actually, all my models are by construction regularized in the Ultraviolet regime, that is, there is no more divergence at zero radius anymore.
+
+
+\section*{The role of Large Extra Dimensions}
+Different models are investigated, because, due to the lack of experimental results in this energy regime, there is plenty of freedom of a matter density choice. Physical motivation may be given by more fundamental theories like String theory, as well as a mixture of new (compared to the Standard Model) concepts and ideas.
+
+One of these ideas is the existence of extra dimensions, already proposed in the 1919s by Kaluza and recasted as possibly »large« extra dimensions in the 1990s by Dimopoulos, ARkani-Hamed and Dvali. Unless Large Extra Dimensions (LXDs) can not be ruled out, they are a legitime additive of Quantum Gravity approaches. Considering the problem of lacking experimental references, the existence of large extra dimensions would have the striking consequence that quantum black holes could be produced and observed in particle collider experiments like the LHC at CERN. Anyway, since the launch of LHC in 2008, no black holes have been seen yet. Increasing beam energys always increased the minimum extend of the supposed rolled up spatial extra dimensions.
+
+In my work, I mostly extended existing approaches to higher dimensions, that is, I checked the compability of approaches to the existence of higher dimensions. Do they still hold their properties?
+
+\section*{The holographic principle}
+The first Quantum Gravity model I explored was the »holographic metric«, a proposal by Spalluci, Nicolini 2012. Mathematically, it features a logarithmic quantum correction to the Black hole entropy. The substantial observance is the entropy dependence of the surface of a black hole, not the volume. This can be recast to the theorem that all information contained in a space-time volume is »projected« on a 3-dimensional space-time surface. This principle was found in String theory and was even applied to QCD. In BH context, area (event horizon) quantization is connected to discrete quantum BH masses.% It is connected to the conjecture of casting quantum black holes as Bose-Einstein-Condensate of gravitons.
+
+In my research, I modified the holographic energy density for compability with extra dimensions and thus confirmed the co-existence of Holography and Large extra dimensions.
+
+\section*{Self-Encoding black holes}
+Another class of Schwarzschild-like quantum gravity approaches are self-encoding metrics. They concern the problem of an inflating number of degrees of freedoms when introducing standard model extensions. By encoding the black hole remnant size with the Planck length, this theory encodes its properties only in the Planck length as the fundamental parameter.
+
+\section*{Quantum Einstein equations}
+Despite the lack of experimental confirmation, the last thing that can be done with a quantum gravity model is to substantiate the Ansatz by modifying the underlying (Quantum) field theory. This is done by smearing the Ricci Salar with a bilocal distribution in favor of modifying the Einstein-Hilbert action to a nonlocal action. I traced these calculations for both the holographic and self-encoding metrics. The result opens the door for comparing the theories with other approaches.
+
+\section*{The Bardeen regular Black Hole: Introducing electric charge}
+Electromagnetism (Reissner-Nordström) and angular momentum (Kerr-Newman) are the two famous extensions to the Schwarzschild black hole found in General Relativity. It is self-evident to consider those extensions also in the quantum regime. On the other hand, investigations about the balding phases emphazise my opinion that the matter-only finale state of the black hole is the most fundamental and most interesting one.
+
+A simple quantum gravity model with electric charge was researched by Bardeen in the 1980s/1990s. The Bardeen solution also exposes self-regular, but charged black holes. In the bardeen solution, the minimal charge takes the role of the minimal length, so in some way it is self-encoding.
+
+\section*{The Generalized Uncertainty Principle and Non-Commuting Geometries}
+Another big field of research is modifying the Heisenberg Uncertainty principle. The generalized uncertainty principle (GUP) claims a momentum dependence of the uncertainty relation. One finds that this enables utraviolet protection of field theories and yields to another famous quantum gravity approach: non-commuting space times, where the position Heisenberg quantum operators do not commute.
+
+This approach, developed by Mureika, Isi and Nicolini, should also be extended to large extra dimensions. One finds that a modification of the GUP is neccessary to hold the same properties in all number of dimensions. The question arises if this is compatible with the motivation of a quadratic momentum dependence, as presumably proposed by Loop Quantum Gravity (Eikonal approximation of string scattering). In my work, I made the higher dimensional Non-Commuting black hole properties to be calculable, but the physical motivation is an ongoing open research question.
+
+
+\end{document}

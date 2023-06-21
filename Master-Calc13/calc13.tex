@@ -1,0 +1,290 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage[american]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+\usepackage{subcaption} % subfigures
+\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+\usepackage{booktabs} % better tables
+\usepackage{floatrow} % caption beside image
+\usepackage[toc,page]{appendix}
+\usepackage{mathtools} % ceil, floor
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+\usepackage[usenames,dvipsnames]{color} % more colors
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc13 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+\newcommand{\CA}{ {\cal A}}
+\newcommand{\C}[1]{ {\cal #1}}
+\newcommand{\mn}{_{\mu\nu}}
+
+% colored symbols:
+% http://tex.stackexchange.com/questions/85033/colored-symbols
+\newcommand*{\mathcolor}{}
+\def\mathcolor#1#{\mathcoloraux{#1}}
+\newcommand*{\mathcoloraux}[3]{%
+  \protect\leavevmode
+  \begingroup
+    \color#1{#2}#3%
+  \endgroup
+}
+% In Text: $a\textcolor{red}{\ast}b$
+% In Math: $a\mathcolor{red}{\ast}b$
+\newcommand{\redmin}{\mathcolor{red}{-}}
+\newcommand{\redplus}{\mathcolor{red}{+}}
+\newcommand{\pn}{\mathcolor{OliveGreen}{+ n}}
+\newcommand{\n}{ {\mathcolor{OliveGreen}{n}} }
+
+\begin{multicols}{2}
+\begin{abstract}
+Calc13, a correction of Calc12.
+\end{abstract}
+\vfill
+\columnbreak
+\tableofcontents
+\end{multicols}
+
+\newpage
+\section{The Scheme to get $\CA$}
+At April 04. I presented my derivation of the modified Action by the bilocal distribution $\C A^2(x-y)$ and it's derivation in momentum space with a $n+3$ dimensional Fourier transform (Calc10). By expressing the Ricci Scalar $R$ as Integral identity $R(x) = \int \d y~\delta(x-y) R(x)$ one can replace~$\delta$ by it's smeared version $\delta \to \C A^2(x-y)~\delta$ and produces a smeared Ricci scalar $\C R(x)$, smeared Einstein Equations and finally the smeared Energy-density tensor $\C T_\mu^\nu$:
+%
+Todo: ist der Abschnitt hierdrüber alt oder neu?  Also Section 1.
+
+\section{Holography, closed form result}
+Consider again the holographic integral (ignoring $r\to z$ transformation)
+\begin{equation}
+\C A^{-2}(p^2) = \frac{1}{\Omega_{n+2}} \int \d^{3+n} \vec z z^{-(2+n)} \dd{h}{z} e^{-i \vec p \vec z}
+\end{equation}
+Using Appendix \ref{appendix:fourier} which contains the improved and with signs corrected version of the effective 1d Fourier integral,
+\begin{subequations}
+\begin{align}
+\mathcal{I} = \int \d^{3+n} \vec z ~ V(|z|) e^{-i \vec p \vec z}
+= \frac{1}{2 \Omega_{n+2}}
+\frac{2\pi i}p \int_{-\infty}^{\infty} \d z ~v(z) e^{-ipz}
+\end{align}
+with the Fourier kernel
+\begin{equation}
+v(z) = z^{1+n} \left( V(z)\Theta(z) + (-1)^n V(-z)\Theta(-z) \right)
+\end{equation}
+\end{subequations}
+Here, $V(z) := z^{-(2+n)} \dd{h}{z}$ and therefore
+\begin{equation}
+v(z) = z^{1+n} \left( \frac{1}{z^{n+2}} \dd hz \Theta(z) + \frac{(-1)^n}{(-z)^{n+2}} \dd hz (-z) \Theta(-z) \right)
+\end{equation}
+As told in the appendix, by construction $v(z)$ is always odd.
+
+The integral value is now given by
+\begin{subequations}
+\begin{align}
+\C A^{-2}(p^2) &= \frac{\Omega_{n+2}}{2 \Omega_{n+2}}
+\frac{2\pi i}p \int_{-\infty}^{\infty} \d z ~v(r) e^{-ipr}
+\\
+&= \frac{\pi i}{2p} \left[
+(2\pi i)(-1) \sum_{z_0} \left( \operatorname*{Res}_{z\to z_0}~v(z) +  \operatorname*{Res}_{z\to -\overline{z_0}} ~v(z) \right) \right]
+\end{align}
+\end{subequations}
+Where $z_0$ is given by the poles of $v(z)$, which means basically of the poles of $\dd hz$ or where the it's denominator is zero: $(-1) = z^{2+n}$, as proposed in eq. (31) in Calc10. So
+\begin{equation}
+z_0 = \exp{\frac{ 2\pi i (\nicefrac 12 + k) }{ 2+n }},\quad k \in \mathbb{N}
+\end{equation}
+Actually there are $|{z_0}|=2+n$ solutions, so basically $k=0,1,\dots,2+n$. In my pole summation rule I proposed in Calc10 and more verbosely in Calc12, I only consider poles where $\text{Re}~z_0 >0 \wedge \text{Im}~z_0 <0$ for reasons of the integration path choice. This corresponds to a special range of $k$ that can be derived when performing Eulers formula $e^{i\varphi} = \cos \varphi + i \sin \varphi$ and searching where $\cos > 0 \wedge \sin <0 \Leftrightarrow \nicefrac  32 \pi \leq \varphi \leq 2\pi \Leftrightarrow$
+\begin{subequations}
+\begin{align}
+k_{\text{min}} & = \ceil{1 + \nicefrac 34 n} \quad \text{(ceiling, aufrunden)}
+\\
+k_{\text{max}} &=  \floor{\nicefrac 32 + n} \quad \text{(floor, abrunden)}
+\end{align}
+\end{subequations}
+Caution must also be made that one does not count poles two times. I did those summations Semi-automated since two month and the problem is, there are always alternating complex results which should not be there according to the Appendix.
+
+%Another Todo: Evaluate the Residues. Nicolini will die sicher nicht sehen.
+
+\begin{equation}
+\begin{array}{lll}
+ \text{n} & \text{$\#$ poles} & \text{Wert f{\" u}r A(p)} \\
+ 0 & 2 & \frac{2 i \pi  e^{-p} (p+1)}{p} \\
+ 1 & 2 & \frac{i \left(-\frac{2}{3} \pi  e^{(-1)^{5/6} p} \left(p+\sqrt[6]{-1}\right)-\frac{2}{3} (-1)^{5/6} \pi  e^{-\sqrt[6]{-1} p}
+   \left(\sqrt[6]{-1} p+1\right)\right)}{p} \\
+ 2 & 2 & \frac{i \left(\frac{1}{2} i \pi  e^{(-1)^{3/4} p} \left((-1)^{3/4}+i p\right)-\frac{1}{2} i \pi  e^{-\sqrt[4]{-1} p}
+   \left(\sqrt[4]{-1}+i p\right)\right)}{p} \\
+ 3 & 2 & \frac{i \left(-\frac{2}{5} \pi  e^{(-1)^{7/10} p} \left(p+(-1)^{3/10}\right)-\frac{2}{5} (-1)^{7/10} \pi  e^{-(-1)^{3/10} p}
+   \left((-1)^{3/10} p+1\right)\right)}{p} \\
+ 4 & 4 & \frac{i \left(\frac{2}{3} \pi  e^{-p} (p+1)+\frac{1}{3} (-1)^{5/6} \pi  e^{(-1)^{2/3} p} \left(\sqrt[6]{-1} p+i\right)-\frac{1}{3}
+   (-1)^{2/3} \pi  e^{-\sqrt[3]{-1} p} \left(\sqrt[3]{-1} p+1\right)\right)}{p} \\
+ 5 & 4 & \frac{i \left(-\frac{2}{7} \pi  e^{(-1)^{13/14} p} \left(p+\sqrt[14]{-1}\right)-\frac{2}{7} \pi  e^{(-1)^{9/14} p}
+   \left(p+(-1)^{5/14}\right)-\frac{2}{7} (-1)^{13/14} \pi  e^{-\sqrt[14]{-1} p} \left(\sqrt[14]{-1} p+1\right)-\frac{2}{7} (-1)^{9/14} \pi 
+   e^{-(-1)^{5/14} p} \left((-1)^{5/14} p+1\right)\right)}{p} \\
+ 6 & 4 & \frac{i \left(-\frac{1}{4} \pi  e^{(-1)^{7/8} p} \left(p+\sqrt[8]{-1}\right)-\frac{1}{4} \pi  e^{(-1)^{5/8} p}
+   \left(p+(-1)^{3/8}\right)-\frac{1}{4} (-1)^{7/8} \pi  e^{-\sqrt[8]{-1} p} \left(\sqrt[8]{-1} p+1\right)-\frac{1}{4} (-1)^{5/8} \pi 
+   e^{-(-1)^{3/8} p} \left((-1)^{3/8} p+1\right)\right)}{p} \\
+ 7 & 4 & \frac{i \left(-\frac{2}{9} \pi  e^{(-1)^{5/6} p} \left(p+\sqrt[6]{-1}\right)-\frac{2}{9} \pi  e^{(-1)^{11/18} p}
+   \left(p+(-1)^{7/18}\right)-\frac{2}{9} (-1)^{5/6} \pi  e^{-\sqrt[6]{-1} p} \left(\sqrt[6]{-1} p+1\right)-\frac{2}{9} (-1)^{11/18} \pi 
+   e^{-(-1)^{7/18} p} \left((-1)^{7/18} p+1\right)\right)}{p} \\
+\end{array}
+\end{equation}
+
+\newpage
+\begin{appendices}
+
+\section{Improvement of the radial symmetric $(n+3)$-dimensional FT} \label{appendix:fourier}
+These calculations were performed already in
+
+\begin{itemize}
+\item Calc10, Section 1.1.1: No detailed derivation, just the use of the 3-dimensional Karbstein approach
+\item Calc12, Appendix A: Derivation only for 3 dimensions, the generalization from $3 \to (3+n)$ was just wrong.
+\end{itemize}
+
+This section will review the calculation of Calc12, but insert the $d=3\pn$ in every step {\it and} take care of the prefactors.
+
+Let's define the Fourier transform $\C F_d$ in $d$ dimensions ($\vec x \in \mathbb R^d$) once again as
+%
+\begin{subequations}
+\begin{align}
+\C F_d\left\{ f \right\}(\vec p) &= \tilde f(\vec p) = \frac 1{(2\pi)^d} \int \d^d x~e^{-i\vec p \cdot \vec x} f(\vec x) \label{eq:Four1} \\
+\C F_d^{-1}\left\{ \tilde f \right\}(\vec x) &= f(\vec x) =   \int d^d p~e^{+i \vec p \cdot \vec x} \tilde f(\vec p) \label{eq:Four2}
+\end{align}
+\end{subequations}
+
+As this section wants to discuss how the integrals in (\ref{eq:Four1},\ref{eq:Four2}) are computed, lets consider only the integral of the forward transformation $\C F_d$ in the next part (That is, supressing the leading $(2\pi)^{-d}$ in the following equations).
+
+Consider the $d=3\pn$ dimensional spherical integral measure, like introduced in Calc10, eqs~(15,16):
+%
+\begin{subequations}
+\begin{align}
+\int \d^d r &= \int_0^\infty \d r ~r^{d-1}
+\int_0^{2\pi} \d \phi
+\prod_{i=1}^{d-2} \int_0^\pi \d \theta_i \sin^i (\theta_i)
+:= \int_0^\infty \d r ~\Omega_{d-1} r^{d-1} \\
+&= \frac {\Omega_{d-1}}2 \underbrace{\int_0^\pi \d \theta_1 \sin(\theta_1)}_{=2} \int_0^\infty \d r ~r^{d-1}
+\quad\quad
+\text{with}
+\quad
+\Omega_{n+2} = 2 \frac{\pi^\frac{n+3}{2}}{\Gamma\left(\frac{n+3}{2}\right)}
+\label{eq:df0b}
+\end{align}
+\end{subequations}
+%
+The $\theta_1$ integral in \eqref{eq:df0b} can only be evaluated to $\int \d \theta_1 \dots = 2$ if the integrand (which is ommitted in these equations) is not dependend of $\theta_1$. In our calculation, this is not the case.
+
+I won't retrace the full Calc12 calculations here. We end up with
+
+\begin{equation}
+\hat V(p) = \frac {\Omega_{2\pn}}2  \frac{2\pi i}p
+\int_{-\infty}^{\infty} \d r~r^{1\pn} \left( V(r) \Theta(r) + (-1)^{2\pn} V(-r) \Theta(-r) \right)
+\end{equation}
+
+Pay attention the toggling minus $(-1)^{2\pn}$, this does {\bf not} allow writing the effective integrand function $v(r) \neq r^{1\pn} V(|r|)$ as supposed in Calc12. Why is it not $(-1)^{1\pn}$? Because when substituting $r\to\redmin r'$ and $\d r\to\redmin \d r'$, it is
+\begin{equation}
+r^{1\pn}\d r = (\redmin 1)^{1+n} (r')^{1+n} (\redmin1) \d r'
+= (\redmin 1)^{\n} r'\d r' = (\redmin 1)^{2\pn} r'\d r'
+\end{equation}
+So opposed as stated in Calc12, $v(r)$ is {\bf always odd} for all $n$, therefore $\forall n$:
+\begin{align}
+\int \d r ~v(r) &\in \mathbb{C} \setminus \mathbb{R}
+\\
+\C F_{n+3}\left\{ V(|\vec r|) \right\} &\in  \mathbb{R}
+\end{align}
+
+
+\end{appendices}
+\end{document}

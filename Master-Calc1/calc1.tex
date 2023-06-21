@@ -1,0 +1,409 @@
+\documentclass[12pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+%\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+
+% Kopfzeile/Fusszeile mit fancy
+\fancyhead{}
+\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc1 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\section{From Density to Metric}
+\subsection{Problem: Mass distribution is wrong!?}
+
+Ansatz, mit Plancklänge $\L=L$ und Masse $M$, Density $\rho$:
+
+\begin{equation}
+\rho(r) = \frac{M}{2\pi r} \frac{\L}{(r^2 + \L^2)^2}
+\end{equation}
+
+This density has two limes
+
+\begin{equation}
+\frac{M}{8\pi \L^3} \xleftarrow{r \simeq \L} \rho(r) \xrightarrow {r \gg \L} 0
+\end{equation}
+
+Man kann daraus eine Massenverteilung ableiten: $\rho = -T^0_0$:
+
+\begin{align}
+\mu(r) &= 4 \pi \int_0^r \mathrm{d} x ~ x^2  \rho(x) \\
+m(r) &= 4 \pi \int_r^\infty \mathrm{d}x ~x^2 (- \rho(x))
+\end{align}
+
+Das unbestimmte Integral ist $4\pi \int x^2 \rho(x) \mathrm{d}x = - \frac{LM}{L^2 + x^2} + C$, aber die bestimmten Integrale haben die eindeutige Lösung
+
+\begin{align}
+\mu(r) &= \frac{M r^2}{L^2+r^2} \\
+m(r) &= -\frac{L^2 M}{L^2+r^2} \label{svenM} \\
+\frac{M}{L} &= \mu(r) + m(r)
+\end{align}
+
+{\bf BUT} the paper states
+
+\begin{equation}
+m(r) = \frac{M r^2}{L^2 + r^2} = M - \frac{LM}{L^2 + r^2} \label{nicoM}
+\end{equation}
+
+Which one is right? Equation \ref{nicoM} and \ref{svenM} only differ by constant: $M + m_6(r) = m_8(r)$.
+
+\subsection{Problem: Source of EOS?}
+
+On some way this yields to a stress energy tensor
+
+\begin{equation}
+T_{\mu \nu} = \text{diag}(-\rho, \pr, \psenk, \psenk)
+\end{equation}
+
+Conservation of stress-energy tensor
+
+\begin{equation}
+\nabla_\nu T^{\mu \nu} = 0
+\end{equation}
+
+yields $\pr = -\rho$ and $\psenk = \pr + \frac{r}{2} \partial_r \pr$, as statet in the paper. Wie kommt man dazu?
+
+
+This determines $T_{\mu \nu}$ components to
+
+\begin{align}
+T_{00} = T_{11} &= -\rho \\
+T_{11} = T_{22} &= -\frac{3}{2} \rho - \frac{2\rho}{r^3 + r\L} 
+= -\frac{L^2 M \left(L^2-3 r^2\right)}{4 \pi  r \left(L^2+r^2\right)^3} \label{nico-p3p4}
+\end{align}
+
+Siehe weiter unten warum das ein Problem ist.
+
+\subsection{Notes}
+
+Ist die folgende Formel eine Ab-Initio-Annahme?
+
+\begin{equation}
+g_{00} = -\left( 1 - \rho \frac{M^2 G}{\pi \L^2}\right) = -g_{11}^{-1}
+\end{equation}
+
+Griffith-Podolsky leiten mit der inneren Schwarzschildgleichung her:
+
+\begin{equation}
+\mu(r) = \int_0^r 4\pi x^2 \rho(x) \d x
+\end{equation}
+
+Außerdem ist die Schwarzschild-Lösung SSM
+
+\begin{equation}
+\metrik{ 1 - \frac{2m}{r} }
+\end{equation}
+
+Vgl A.S Vaidya Radiating SSM wo $m=m(r)$. Inner Schwarzschild:
+
+\begin{equation}
+\d s^2 = - \exp \left( 2 \Phi(r) \right) \d t^2 + \left( 1 - \frac{2\mu(r)}{r} \right)^{-1} \d r^2 + \winkel \label{SSMinner}
+\end{equation}
+
+Aus Einsteingleichungen folgert man da typischerweise Constraints an $\frac{\d \Phi}{\d r}$. Ist $\mu(r) = m(r)$? Außerdem haben wir offensichtlich kein isotropes $p$, wovon inner Schwarzschild immer ausgeht.
+
+Dazu: Adler Razin Seite 262ff
+
+Sowie Inner Schwarzschild S. 290
+
+\section{From metric to density and pressure}
+
+Isotropic static metric, Standardform (Achtung, Signatur $+---$!)
+
+\begin{equation}
+\d s^2 = B(r) \d t^2 - A(r) \d r^2 - r^2 \d \Omega^2
+\end{equation}
+
+Hier: $B(r) = 1 - \frac{2 m(r) G}{r} = 1 / A(r)$ mit $m(r) = M r^2 / (L^2 + r^2)$, $L = \L$.
+
+Berechne Inverse Metrik:
+
+\begin{align}
+g_{\mu \nu} &= \text{diag}(B, -A, -r^2, -r^2 \sin^2 \theta) \\
+g^{\mu \nu} &= \text{diag}\left(\frac 1B, \frac{-1}A, \frac{-1}{r^2}, \frac{-1}{r^2\sin^2\theta}\right) = g_{\mu\nu}^{-1}
+\end{align}
+
+\subsection{Kristoffels und Kovariante Ableitung}
+Berechne damit Kristoffelsymbole:
+
+\begin{equation}
+\Gamma^\sigma_{\lambda \mu} = \frac{g^{\sigma \nu}}2 \left( \frac{\partial g_{\mu \nu}}{\partial x^\lambda} + \frac{\partial g_{\lambda \nu}}{\partial x^\mu} - \frac{\partial g_{\mu\lambda}}{\partial x^\nu} \right)
+\end{equation}
+
+Berechne Komponenten (Fließbach ART, S. 134)
+
+\begin{align}
+\Gamma^{0}_{01} &= \Gamma^{0}_{10} = \frac{B'}{2B} = \frac{G M \left(r^2-L^2\right)}{\left(L^2+r^2\right) \left(r (r-2 G
+   M)+L^2\right)} \\
+%
+\Gamma^1_{00} &= \frac{B'}{2A} = \frac{G M \left(r^2-L^2\right)}{A \left(L^2+r^2\right)^2} \\
+%
+\Gamma^1_{11} &= \frac{A'}{2A} = \frac{G M (L-r) (L+r)}{\left(L^2+r^2\right) \left(r (r-2 G M)+L^2\right)} \\
+%
+\Gamma^2_{12} &= \Gamma^2_{21} = \frac{1}{r} \\
+%
+\Gamma^1_{22} &= -\frac{1}{A} \\
+%
+\Gamma^1_{33} &= -\frac{r\sin^2 \theta}{A} \\
+%
+\Gamma^3_{13} &= \Gamma^3_{31} = \frac 1r \\
+%
+\Gamma^3_{23} &= \Gamma^3_{32} = \cot \theta \\
+%
+\Gamma^2_{33} &= -\sin \theta \cos \theta
+\end{align}
+
+Die anderen Komponenten sind alle 0.
+
+Dies erlaubt nun das Berechnen der kovarianten Ableitung:
+
+\begin{align}
+\nabla_a t^\nu &= \partial_a t^\nu + \Gamma^\mu_{ac} t^c \\
+\nabla_a T^{\mu \nu} &= \partial_a T^{\mu\nu} + \Gamma_{sa}^\mu T^{s\nu} + \Gamma_{as}^{\nu} T^{\mu s}
+\end{align}
+
+Nun können wir für die Metrik ausrechnen, was die Kontraktion
+
+\begin{equation}
+0 = \nabla_\mu T^{\mu \nu} = \partial_\mu T^{\mu\nu} + \Gamma_{s\mu}^\mu T^{s\nu} + \Gamma^\nu_{\mu s} T^{\mu s}
+\end{equation}
+bedeutet. Dies ist ein Gleichungssystem mit vier Gleichungen ($0=0^\nu$).  Mit Ansatz
+$T^{\mu \nu} = \text{diag}(p_1 := \rho, p_2 := -\rho, p_3, p_4)$ kann man nun mit 4 Gleichungen die zwei Unbekannte $p_3 = p_3(p_1,p_2)$, $p_4 = p_4(p_1,p_2)$ ausdrücken:
+
+\begin{align}
+p_3 &= \frac{\frac{G M r \left(r^2-L^2\right) \rho (r)}{\left(L^2+r^2\right)^2}+\frac{p_r(r) \left(L^2 r (4 r-3 G M)+r^3 (2 r-5 G M)+2 L^4\right)}{\left(r (r-2 G
+   M)+L^2\right)^2}}{2 r^2} \label{myp3} \\
+%
+p_4 &= \frac{\csc ^2(\theta ) \left(\frac{G M r \left(r^2-L^2\right) \rho (r)}{\left(L^2+r^2\right)^2}+\frac{p_r(r) \left(L^2 r (4 r-3 G M)+r^3 (2 r-5 G M)+2
+   L^4\right)}{\left(r (r-2 G M)+L^2\right)^2}\right)}{2 r^2} \label{myp4}
+\end{align}
+
+{\bf BUT} Gleichungen \ref{myp3} und \ref{myp4} sind unvereinbar mit \ref{nico-p3p4} aus dem Paper, also
+\begin{equation}
+p_3=p_4 \neq -\rho(r) - \frac{r}{2} \partial_r \rho(r) \quad !!!
+\end{equation}
+
+Alternativ kann man auch erst mal die Energieerhaltungsgleichungen außen vor lassen und die Einsteingleichungen lösen.
+
+\subsection{Ricci-Tensor und Einstein-Gleichungen}
+Berechne nun Ricci-Tensor $R_{\mu\nu}$
+
+\begin{align}
+R_{\mu \nu} &= R^\rho_{\mu \rho \nu} = g^{\kappa \rho} R_{\kappa \mu \rho \nu} \\
+ &= \frac{\partial \Gamma^\rho_{\mu\rho}}{\partial x^\nu} - \frac{\partial \Gamma^\rho_{\mu\nu}}{\partial x^\rho	} + \Gamma^\sigma_{\mu\rho} \Gamma^\rho_{\sigma \nu} - \Gamma^\sigma_{\mu\nu}\Gamma^\rho_{\sigma\rho}
+\end{align}
+
+Erhalte hierbei
+
+\begin{align}
+R_{00} &= \frac{2 G L^2 M \left(L^2-3 r^2\right) \left(r (r-2 G M)+L^2\right)}{r
+   \left(L^2+r^2\right)^4} \\
+R_{11} &= -\frac{2 G M \left(L^4-3 L^2 r^2\right)}{r \left(L^2+r^2\right)^2 \left(r
+   (r-2 G M)+L^2\right)} \\
+R_{22} &= -\frac{4 G L^2 M r}{\left(L^2+r^2\right)^2} \\\
+R_{33} &= R_{22} \sin^2 \theta \\
+R_{\mu \nu} &= 0 \quad\text{für}\quad \mu \neq \nu 
+\end{align}
+
+Der Ricci-Skalar $R = R^\mu_\mu = g^{\mu \nu} R_{\mu \nu}$ lautet
+
+\begin{equation}
+R = -\frac{40 G L^2 M r}{\left(L^2+r^2\right)^3}+\frac{24 G L^4 M}{r \left(L^2+r^2\right)^3}+\frac{18 L^2
+   r^2}{\left(L^2+r^2\right)^3}+\frac{6 r^4}{\left(L^2+r^2\right)^3}+\frac{6 L^6}{r^2
+   \left(L^2+r^2\right)^3}+\frac{18 L^4}{\left(L^2+r^2\right)^3}
+\end{equation}
+
+und sieht damit irgendwie falsch aus. Er geht in die Einstein-Gleichungen ein:
+
+\begin{equation}
+R_{\mu\nu} - \frac{R}{2} g_{\mu\nu} = -\frac{8\pi G}{c^4} T_{\mu\nu} \label{einstein}
+\end{equation}
+
+Wenn wir in gleicher Weise die Energiespur $T = T^\mu_\mu$ definieren, ergibt Kontraktion der Einsteingleichung $-R = -\frac{8\pi G}{c^4} T$ und damit eine andere Schreibweise von Einstein:
+
+\begin{equation}
+R_{\mu \nu} = - \frac{8 \pi G}{c^4} \left( T_{\mu\nu} - \frac{T}{2} g_{\mu\nu} \right)
+\end{equation}
+
+Wenn ich den  Argumentationsweg {\it Metrik \dann Christoffel \dann Ricci \dann Energieimpuls } wähle, stelle ich \ref{einstein} nach $T_{\mu\nu}$ um ($c=1$):
+
+\begin{equation}
+T_{\mu \nu} = -\frac{R_{\mu \nu} - \frac{R}{2} g_{\mu\nu}}{8 \pi G} \label{myT}
+\end{equation}
+
+Das Ergebnis von \ref{myT} ist die Monster-Diagonalmatrix
+
+\tiny
+\begin{align*}
+T_{00} &= -\frac{5 G L^2 M^2 r^2}{2 \pi  \left(L^2+r^2\right)^4}+\frac{9 G M^2 r^4}{4 \pi 
+   \left(L^2+r^2\right)^4}+\frac{3 r^6}{8 \pi  G \left(L^2+r^2\right)^4}+\frac{3 L^2 r^4}{2 \pi  G
+   \left(L^2+r^2\right)^4}+\frac{3 L^8}{8 \pi  G r^2 \left(L^2+r^2\right)^4}+\frac{3 L^6}{2 \pi  G
+   \left(L^2+r^2\right)^4}-\frac{7 G L^4 M^2}{4 \pi  \left(L^2+r^2\right)^4}+\frac{9 L^4 r^2}{4 \pi  G
+   \left(L^2+r^2\right)^4}-\frac{3 M r^5}{2 \pi  \left(L^2+r^2\right)^4}-\frac{5 L^2 M r^3}{2 \pi 
+   \left(L^2+r^2\right)^4}+\frac{L^6 M}{2 \pi  r \left(L^2+r^2\right)^4}-\frac{L^4 M r}{2 \pi 
+   \left(L^2+r^2\right)^4} \\
+T_{11} &= \frac{11 G L^2 M^2 r^2}{2 \pi  \left(L^2+r^2\right)^2 \left(r (r-2 G M)+L^2\right)^2}+\frac{9 G M^2
+   r^4}{4 \pi  \left(L^2+r^2\right)^2 \left(r (r-2 G M)+L^2\right)^2}+\frac{3 r^6}{8 \pi  G
+   \left(L^2+r^2\right)^2 \left(r (r-2 G M)+L^2\right)^2}-\frac{3 M r^5}{2 \pi  \left(L^2+r^2\right)^2
+   \left(r (r-2 G M)+L^2\right)^2}+\frac{3 L^2 r^4}{2 \pi  G \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}-\frac{13 L^2 M r^3}{2 \pi  \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}+\frac{3 L^8}{8 \pi  G r^2 \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}-\frac{7 L^6 M}{2 \pi  r \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}+\frac{3 L^6}{2 \pi  G \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}+\frac{25 G L^4 M^2}{4 \pi  \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}+\frac{9 L^4 r^2}{4 \pi  G \left(L^2+r^2\right)^2 \left(r (r-2 G
+   M)+L^2\right)^2}-\frac{17 L^4 M r}{2 \pi  \left(L^2+r^2\right)^2 \left(r (r-2 G M)+L^2\right)^2} \\
+T_{22} &= \frac{3 r^6 \csc ^2(\theta )}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{3 r^6}{4 \pi  G
+   \left(L^2+r^2\right)^3}+\frac{9 L^2 r^4 \csc ^2(\theta )}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{9
+   L^2 r^4}{4 \pi  G \left(L^2+r^2\right)^3}+\frac{3 L^6 \csc ^2(\theta )}{8 \pi  G
+   \left(L^2+r^2\right)^3}-\frac{3 L^6}{4 \pi  G \left(L^2+r^2\right)^3}+\frac{9 L^4 r^2 \csc ^2(\theta
+   )}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{9 L^4 r^2}{4 \pi  G \left(L^2+r^2\right)^3}+\frac{9 L^2 M
+   r^3}{2 \pi  \left(L^2+r^2\right)^3}+\frac{L^4 M r}{2 \pi  \left(L^2+r^2\right)^3} \\
+T_{33} &= -\frac{3 r^6}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{9 L^2 r^4}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{3
+   L^6}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{9 L^4 r^2}{8 \pi  G \left(L^2+r^2\right)^3}-\frac{9 L^2 M
+   r^3 \cos (2 \theta )}{4 \pi  \left(L^2+r^2\right)^3}+\frac{9 L^2 M r^3}{4 \pi 
+   \left(L^2+r^2\right)^3}-\frac{L^4 M r \cos (2 \theta )}{4 \pi  \left(L^2+r^2\right)^3}+\frac{L^4 M
+   r}{4 \pi  \left(L^2+r^2\right)^3}
+\end{align*}
+\normalsize
+
+Das ist garantiert falsch. Warum?
+
+Zum Crosscheck ließe sich mit dem neuen Tensor nochmal $0 = \nabla_\mu T^{\mu \nu}$ berechnen, aber das führt zu nichts neuem brauchbaren (ähnlich wie oben).
+
+\newpage
+\section{Hawking Temperature}
+
+Normales Vorgehen ist wohl bei SMM-artigen Metriken:
+
+\begin{equation}
+\kappa = \frac{1}{2} \left. \frac{\partial C}{\partial r}  \right|_{r=r_+}  ~ \rightarrow ~ T_H = \frac{\kappa}{2 \pi k_B} = \frac{\kappa}{2 \pi}
+\end{equation}
+
+Dabei ist $C(r)$ eigentlich durch den Übergang in Interior/Exterior-Koordinaten gegeben (vgl BH2-Präsentation). Mein erster Ansatz würde einfach einsetzen:
+
+\begin{equation}
+C(r) := 1 - \frac{2 M L r}{r^2 + L^2}
+\end{equation}
+
+Gemäß dem Paper gilt
+
+\begin{equation}
+r_+ = r_h = L^2 \left( M \pm + \sqrt{M^2 - M_p^2} \right)
+\end{equation}
+
+Also ist
+
+\begin{equation}
+\kappa = \frac{1}{2} \left( \frac{4 L M
+   r^3}{\left(L^2+r^2\right)^2
+   }-\frac{4 L M r}{L^2+r^2} \right)_{r = r_h}
+\end{equation}
+
+Setzt man hier
+
+\begin{equation}
+M = \frac{1}{2 L^2 r_h} (r_h^2 + L^2)
+\end{equation}
+
+aus dem Paper ein, dann bekommt man eine seltsame Hawkin-Temperatur von
+
+\begin{equation}
+T_H = - \frac{1}{2\pi} \left( \frac{L}{L^2 + r_+^2} \right)
+\end{equation}
+
+Vergleich mit dem gesuchten Ergebnis:
+
+\begin{equation}
+T_{H,\text{Paper}} = \frac{1}{4 \pi r_+} \left( 1 - \frac{2 L^2}{r_+^2 + L^2} \right)
+\end{equation}
+
+{\bf WHY} does this calculation not lead the correct result?
+
+Back-calculation from $T_{H,\text{Paper}}$:
+
+\begin{equation}
+C_\text{Paper}(r) = 4\pi \int T_{H,\text{Paper}} \mathrm{d}r = \log \left( abc \right)
+\end{equation}
+
+Looks like an entry in the SMM inner metric \ref{SSMinner}, $\d s^2 = - \exp \left( 2 \Phi(r) \right) \d t^2 + \dots$. True?
+
+
+
+
+% Literaturangaben
+%\renewcommand{\refname}{Quellen}
+%\begin{thebibliography}{99}
+%\bibitem{Buch} W. Buckel, R. Kleiner: {\it Supraleitung}, Wiley-VHC
+%\end{thebibliography}
+\end{document}

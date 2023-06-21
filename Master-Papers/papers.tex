@@ -1,0 +1,304 @@
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+%\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+\newlength\dlf
+\newcommand\alignedbox[2]{
+  % #1 = before alignment
+  % #2 = after alignment
+  &
+  \begingroup
+  \settowidth\dlf{$\displaystyle #1$}
+  \addtolength\dlf{\fboxsep+\fboxrule}
+  \hspace{-\dlf}
+  \fcolorbox{red}{yellow}{$\displaystyle #1 #2$}
+  \endgroup
+}
+
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc: Papers \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\begin{multicols}{2}
+This writeup follows Calc2 and lists papers I read, sorted by their ideas.
+
+\vspace{1.3cm}
+Definition of frequently used formulas:
+%
+\begin{align*}
+\d s^2 &= -f(r) \d t^2 + f^{-1}(r) \d r^2 + r^2 \d \Omega^2 \\
+T_H &= \left( \frac{1}{4 \pi} \dd{g_{00}}{r} \right)_{r=r_H} \\
+\gamma(s;x) &= \int_0^x t^{s-1} e^{-t} \d t
+\end{align*}
+%
+\columnbreak
+\tableofcontents
+\end{multicols}
+\section{Papers using NC approaches}
+%\rule{0.9\textwidth}{0.4pt}
+\begin{multicols}{2}
+\subsection{NSS 2006} \label{NSS 2006}
+\begin{description}
+  \item[Title] Noncommutative geometry inspired Schwarzschild black hole
+  \item[Keywords] NC
+  \item[Genutzt von] Rizzo 2006
+\end{description}
+
+Auch eines der wichtigsten, die ich gelesen habe.
+
+
+\vfill
+\columnbreak
+\begin{align}
+\highlight{ \rho_\theta(r)}  &= \frac{M}{(4 \pi \theta)^{3/2}} e^{-r^2 / 4 \theta} \\
+f(r) &= 1 - \frac{4 M }{r \sqrt{\pi}} \gamma(3/2, r^2/4\theta) \\
+r_H & = \frac{4M}{\sqrt{\pi}} \gamma(3/2; r_H^2 / 4\theta) \\
+T_H &= \frac{1}{4 \pi r_H} \left( 1 - \frac{r^3_H}{4 \theta^{3/2}} \frac{e^{-r^2_H / 4 \theta}}{\gamma(3/2, r_H^2 / 4 \theta)} \right)  %\nonumber
+\end{align}
+\vfill
+
+\end{multicols}
+\rule{0.9\textwidth}{0.4pt}
+
+\begin{multicols}{2}
+\subsection{Rizzo 2006}\label{Rizzo2006}
+\begin{description}
+  \item[Title] Noncommutative inspired black holes in extra dimensions
+  \item[Basiert auf]  NSS 2006 NC Ansatz (Section \ref{NSS 2006})
+\end{description}
+
+\vfill
+\columnbreak
+\begin{align}
+\highlight{ \rho_\theta(r) } &= \frac{M}{(4 \pi \theta)^{3/2}} e^{-r^2 / 4 \theta} \\
+&\to \frac{M}{(4\pi\theta)^{(n+3)/2}} e^{-r^2 / 4\theta}
+\end{align}
+
+\end{multicols}
+\rule{0.9\textwidth}{0.4pt}
+
+
+\section{Other papers}
+\begin{multicols}{2}
+\subsection{N Aug 2010}
+\begin{description}
+  \item[Title] Entropic force, noncommutative gravity and ungravity
+  \item[Keywords] Emergent gravity, Verlinde
+  \item[Basic Ideas] Newton $F(r)$ herleiten aus $S=k_B \ln N$. Später mit $n$ Raumdimensionen und in $\cal G$ einige Effekte.
+\end{description}
+
+
+\vfill
+\columnbreak
+\begin{align}
+f(r) &= 1 - \frac{2M}{r^{n-2} c^2} {\cal G}(r) \\
+F &= \frac{G M m}{r^2} \left( 1 + 4 L^2 \frac{\partial S}{\partial A} \right)
+\end{align}
+
+Nicht so passend zum Thema $f(r)$.
+
+\end{multicols}
+\rule{0.9\textwidth}{0.4pt}
+\pagebreak
+\begin{multicols}{2}
+
+\subsection{N Feb 2012}
+\begin{description}
+  \item[Title] Nonlocal and generalized uncertainity principle black holes
+  \item[Keywords] EH-Action
+  \item[Basic Ideas] Operator ${\cal A}(x-y)$, running ${\cal G}(r)$, Length scale $l$ of theory
+\end{description}
+
+Nicht passend zum Thema.
+
+\vfill
+\columnbreak
+
+\begin{align*}
+S &= \frac{1}{16 \pi G} \int \d^4 x \sqrt{-g} {\cal R}(x) \\
+{\cal R}(x) &= \int \d^4 y \sqrt{-g} {\cal A}^2(x-y) R(y) \\
+{\cal A}^2(x-y) &= {\cal A}^2 (\square_x) \delta^4 (x-y) \\
+\square_x &= l^2 g_{\mu\nu} \nabla^\mu \nabla^\nu \\
+{\cal A}(p^2) &= \exp( {l}^2 p^2 / 2) \dots \\
+{\cal T}_{\mu \nu} &= {\cal A}^{-2}(\square) T_{\mu \nu} \\
+f(r) &= 1 - \frac{G M \gamma(2;r/\sqrt{\beta})}{r}
+\end{align*}
+
+\end{multicols}
+%\rule{0.9\textwidth}{0.4pt}
+
+\section{Papers using Holographic approaches}
+\begin{multicols}{2}
+\subsection{NS Okt 2012} \label{NS2012}
+\begin{description}
+  \item[Title] Holographic screens in ultraviolet self-complete quantum gravity
+  \item[Keywords] Holography
+\end{description}
+
+Das Hauptpaper, was ich als erstes las, darüber geht auch Calc1.
+
+Das Paper umfasst zwei Ansätze, $h_\alpha(r)$ und $h(r)$.
+
+Im ersten Ansatz setzt Bedingung $M_P=M_0$, $M_0=M(r_0)$ das $\alpha = \alpha_0$, $r_0 = L_P$. Im zweiten Ansatz wird eine der drei Bedigungen an eine Metrik verworfen.
+
+\vfill
+\columnbreak
+
+\begin{align}
+\highlight{ f(r) } &= 1 - \frac{2 M G}{r} h_{\alpha, \dots}(r) \\
+\highlight{ h_\alpha(r) } &= \frac{r^3}{(r^\alpha + (\tilde{r}_0)^\alpha / 2)^{3/\alpha}}\\
+\highlight{ h(r) } &= \frac{r^2}{r^2 + L^2} = 1 - \frac{L^2}{r^2 + L^2} \\
+\highlight{ \rho(r) } &= \frac{M}{2\pi r} \frac{L^2}{(r^2 + L^2)^2} \\
+\highlight{ m(r) } &= \frac{Mr^2}{L^2 + r^2} = M - \frac{LM}{L^2 + r^2}
+\end{align}
+\end{multicols}
+\rule{0.9\textwidth}{0.4pt}
+\begin{multicols}{2}
+\subsection{NS 06.11.2013} \label{NS2013}
+\begin{description}
+  \item[Title] Holographic screens in ultraviolet self-complete quantum gravity
+  \item[Keywords] Holography
+  \item[Source] Elsevier Preprint by Mail am 12.11.13
+\end{description}
+
+\vfill
+\columnbreak
+
+\begin{align}
+\highlight{ \rho(r) } &= \frac{M}{4 \pi r^2} \delta(r) \\
+\delta(r) &= \dd{}{r} \Theta(r) \\
+\Theta(r) &\to h(r) \\
+\highlight{ \rho(r) } &= \frac{M}{4 \pi r^2} \dd{}{r} h(r) = T^0_0 \\
+h(r) &= 1 - L^2 / (r^2 + L^2) \\
+\sigma_h &= M / (4 \pi r_h^2)
+\end{align}
+\end{multicols}
+\clearpage
+%\rule{0.9\textwidth}{0.4pt}
+
+\section{Papers using Self-Completeness and Self-Regular approaches}
+\begin{multicols}{2}
+\subsection{NIM 07.11.2013}
+\begin{description}
+  \item[Title] Self-Completeness and the Generalized Uncertainity Principle
+  \item[Keywords] -
+\end{description}
+Ein neues veröffentlichtes Paper auf ArXiv, parallel zum Preprint. Erstmals hübsche Bilder. Herleitung von $f(r)$ aus Operator $\cal A$:
+
+\vfill
+\columnbreak
+\begin{align}
+f(r) = 1 - 2 \frac{G M}{c^2 r} \gamma( 2; \frac{r}{\sqrt{\beta}} )
+\end{align}
+\end{multicols}
+\rule{0.9\textwidth}{0.4pt}
+
+
+
+
+
+
+
+
+% Literaturangaben
+%\renewcommand{\refname}{Quellen}
+%\begin{thebibliography}{99}
+%\bibitem{Buch} W. Buckel, R. Kleiner: {\it Supraleitung}, Wiley-VHC
+%\end{thebibliography}
+\end{document}

@@ -1,0 +1,261 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[      7277,        251]
+NotebookOptionsPosition[      6385,        214]
+NotebookOutlinePosition[      6722,        229]
+CellTagsIndexPosition[      6679,        226]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell["\<\
+Rausgeholt aus Calc12/Symmetrie f\[UDoubleDot]r Bardeen, um \
+\[OpenCurlyDoubleQuote]Legende\[CloseCurlyDoubleQuote] in Latex zu machen.\
+\>", "Text",
+ CellChangeTimes->{{3.612036145507986*^9, 3.612036156776848*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Lighter", "@", "Yellow"}], ",", 
+     RowBox[{"Disk", "[", "]"}], ",", 
+     RowBox[{"Text", "@", 
+      RowBox[{"Style", "[", 
+       RowBox[{"\"\<R\>\"", ",", "\"\<Title\>\"", ",", "18", ",", "Bold", ",", 
+        RowBox[{"Darker", "[", "Yellow", "]"}]}], "]"}]}]}], "}"}], ",", " ", 
+   
+   RowBox[{"ImageSize", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.612034410958371*^9, 3.6120344372091722`*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  {RGBColor[1, 1, 
+    NCache[
+     Rational[1, 3], 0.3333333333333333]], DiskBox[{0, 0}], InsetBox[
+    StyleBox["\<\"R\"\>", "Title",
+     StripOnInput->False,
+     LineColor->RGBColor[
+       Rational[2, 3], 
+       Rational[2, 3], 0],
+     FrontFaceColor->RGBColor[
+       Rational[2, 3], 
+       Rational[2, 3], 0],
+     BackFaceColor->RGBColor[
+       Rational[2, 3], 
+       Rational[2, 3], 0],
+     GraphicsColor->RGBColor[
+       Rational[2, 3], 
+       Rational[2, 3], 0],
+     FontSize->18,
+     FontWeight->Bold,
+     FontColor->RGBColor[
+       Rational[2, 3], 
+       Rational[2, 3], 0]], {0, 0}]},
+  ImageSize->40]], "Output",
+ CellChangeTimes->{{3.612034400838442*^9, 3.6120344374565907`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Lighter", "@", "Magenta"}], ",", 
+     RowBox[{"Disk", "[", "]"}], ",", 
+     RowBox[{"Text", "@", 
+      RowBox[{"Style", "[", 
+       RowBox[{"\"\<L\>\"", ",", "\"\<Title\>\"", ",", "18", ",", "Bold", ",", 
+        RowBox[{"Darker", "[", "Magenta", "]"}]}], "]"}]}]}], "}"}], ",", " ", 
+   RowBox[{"ImageSize", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{3.6120344681094723`*^9}],
+
+Cell[BoxData[
+ GraphicsBox[
+  {RGBColor[1, 
+    NCache[
+     Rational[1, 3], 0.3333333333333333], 1], DiskBox[{0, 0}], InsetBox[
+    StyleBox["\<\"L\"\>", "Title",
+     StripOnInput->False,
+     LineColor->RGBColor[
+       Rational[2, 3], 0, 
+       Rational[2, 3]],
+     FrontFaceColor->RGBColor[
+       Rational[2, 3], 0, 
+       Rational[2, 3]],
+     BackFaceColor->RGBColor[
+       Rational[2, 3], 0, 
+       Rational[2, 3]],
+     GraphicsColor->RGBColor[
+       Rational[2, 3], 0, 
+       Rational[2, 3]],
+     FontSize->18,
+     FontWeight->Bold,
+     FontColor->RGBColor[
+       Rational[2, 3], 0, 
+       Rational[2, 3]]], {0, 0}]},
+  ImageSize->40]], "Output",
+ CellChangeTimes->{3.6120344728791656`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"White", ",", 
+     RowBox[{"Disk", "[", "]"}], ",", 
+     RowBox[{"Text", "@", 
+      RowBox[{"Style", "[", 
+       RowBox[{
+       "\"\<\>\"", ",", "\"\<Title\>\"", ",", "18", ",", "Bold", ",", 
+        RowBox[{"Darker", "[", "Magenta", "]"}]}], "]"}]}], ",", "Black", ",", 
+     RowBox[{"Thickness", "[", "0.15", "]"}], ",", 
+     RowBox[{"Circle", "[", "]"}]}], "}"}], ",", " ", 
+   RowBox[{"ImageSize", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.612035141361391*^9, 3.6120351772240047`*^9}, 
+   3.612035239921829*^9, {3.6120353578952837`*^9, 3.612035358550559*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {GrayLevel[1], DiskBox[{0, 0}], InsetBox[
+     StyleBox["\<\"\"\>", "Title",
+      StripOnInput->False,
+      LineColor->RGBColor[
+        Rational[2, 3], 0, 
+        Rational[2, 3]],
+      FrontFaceColor->RGBColor[
+        Rational[2, 3], 0, 
+        Rational[2, 3]],
+      BackFaceColor->RGBColor[
+        Rational[2, 3], 0, 
+        Rational[2, 3]],
+      GraphicsColor->RGBColor[
+        Rational[2, 3], 0, 
+        Rational[2, 3]],
+      FontSize->18,
+      FontWeight->Bold,
+      FontColor->RGBColor[
+        Rational[2, 3], 0, 
+        Rational[2, 3]]], {0, 0}]}, 
+   {GrayLevel[0], Thickness[0.15], CircleBox[{0, 0}]}},
+  ImageSize->40]], "Output",
+ CellChangeTimes->{3.612035243658865*^9, 3.612035358776568*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Graphics", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"Blue", ",", " ", 
+     RowBox[{"Opacity", "[", "0.1", "]"}], ",", 
+     RowBox[{"Disk", "[", "]"}]}], "}"}], ",", 
+   RowBox[{"ImageSize", "\[Rule]", " ", "40"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6120351994401484`*^9, 3.612035215819326*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  {RGBColor[0, 0, 1], Opacity[0.1], DiskBox[{0, 0}]},
+  ImageSize->40]], "Output",
+ CellChangeTimes->{{3.612035205226652*^9, 3.612035216075671*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"ColorConvert", "[", " ", 
+   RowBox[{
+    RowBox[{"Lighter", "[", 
+     RowBox[{"Blue", ",", " ", "0.9"}], "]"}], ",", " ", "\"\<RGB\>\""}], 
+   "]"}], "*", "256"}]], "Input",
+ CellChangeTimes->{{3.612034134745344*^9, 3.612034140959709*^9}, {
+  3.612034192794209*^9, 3.612034194664762*^9}, {3.612034270475234*^9, 
+  3.6120343204804487`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"256", " ", 
+  RowBox[{"RGBColor", "[", 
+   RowBox[{"0.9`", ",", "0.9`", ",", "1.`"}], "]"}]}]], "Output",
+ CellChangeTimes->{
+  3.612033450817013*^9, 3.612034141313685*^9, 3.612034194944594*^9, {
+   3.612034271366848*^9, 3.6120343206962852`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"0.9", " ", "*", " ", "256"}], " ", "//", " ", "N"}]], "Input",
+ CellChangeTimes->{{3.6120342485312366`*^9, 3.612034252295225*^9}, {
+  3.6120343239562597`*^9, 3.612034324320253*^9}}],
+
+Cell[BoxData["230.4`"], "Output",
+ CellChangeTimes->{3.612034252493175*^9, 3.612034324634444*^9}]
+}, Open  ]]
+},
+WindowSize->{740, 731},
+WindowMargins->{{140, Automatic}, {Automatic, 42}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[557, 20, 226, 4, 31, "Text"],
+Cell[CellGroupData[{
+Cell[808, 28, 521, 13, 77, "Input"],
+Cell[1332, 43, 737, 25, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[2106, 73, 495, 12, 77, "Input"],
+Cell[2604, 87, 713, 25, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3354, 117, 673, 15, 77, "Input"],
+Cell[4030, 134, 753, 24, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4820, 163, 331, 8, 32, "Input"],
+Cell[5154, 173, 176, 4, 55, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5367, 182, 376, 9, 32, "Input"],
+Cell[5746, 193, 270, 6, 32, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[6053, 204, 216, 4, 32, "Input"],
+Cell[6272, 210, 97, 1, 32, "Output"]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
+

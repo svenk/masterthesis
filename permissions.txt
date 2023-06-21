@@ -1,0 +1,9 @@
+# Thesis ist offen
+Master-Thesis: open
+
+# "Master-Archiv" ist public zum reinschauen
+Master-Archiv: public
+
+# alle anderen Ordner derzeit locked...
+Master-*: password
+

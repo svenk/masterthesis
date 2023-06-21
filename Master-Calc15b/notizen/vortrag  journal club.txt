@@ -1,0 +1,18 @@
+
+1) Integral p->inf Divergence scheme:
+   warum im nenner etwas wie p^(n+2) stehen muss
+   (Den Nenner Fourierentwickeln!)
+
+2) Metriken:
+   * Holographic + ndim
+   * Self-Encoding + ndim
+   * Bardeen
+   * GUP/NC + ndim
+   * Dirkes 2013 (eq5)
+
+3) Lösungsstrategie:
+   ndim Fourier Integral -> 1d effektives Integral
+   exemplarische Polbild
+   Frage: Ist das Holomorphisch?
+
+4) Ergebnisse

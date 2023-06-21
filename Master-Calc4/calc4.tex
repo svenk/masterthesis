@@ -1,0 +1,202 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+%\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc4 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\section{Holography in $D$ dim, corrected}
+This writeup contains the corrected calculations from Calc3 and then follows more strictly the Rizzo approach for calculation Black Hole properties. 
+
+\subsection{Framework: Rizzo}
+From Rizzo2006 we have a generic solution for a Schwarzschild-like Metric in $D$ dimensions (so $n=D-4$ extra dimensions),
+\begin{equation}
+\metrik{1 - f(r)}
+\end{equation}
+
+It is the ODE
+
+\begin{equation}
+f'(r) + \frac{n+1}{r} f(r) = \frac{1}{M^\star} \frac{2r\rho(r)}{n+2}
+\end{equation}
+
+with $M_*$ the reduced fundamental mass scale of the theory (shortcut $M^\star = M_*^{n+2}$). It is easy to solve this for any $\rho(r)$ to
+
+\begin{equation}
+f(r) = \frac{1}{r^{n+1}} \left(\frac{2}{(n+2)M^\star}\int_{c_1}^r (r')^{n+2} \rho (r') \, \d r' + c_2 \right) \quad\text{with } c_1, c_2 =\text{const}  \label{general-sol}
+\end{equation}
+
+like already done in Calc3.
+
+\subsection{Holography in $D$ dim}
+
+With the NS 2011 generalized density $\rho(r)$ to $D$ dimensions,
+
+\begin{equation}
+\rho(r) = \frac{M}{\Omega(r)} \dd{h(r)}{r}, \quad \Omega(r) = \Omega_{D-2} r^{D-2} = \Omega_{n+2} r^{n+2}
+\end{equation}
+
+the integral in $f(r)$ is evaluated in a trivial manner (this was done wrong in Calc3). That is, it reads
+
+\begin{align}
+f(r) &= \frac{1}{r^{n+1}} \left( \frac{2}{(n+2) M^\star} \int^r \frac{M}{\Omega_{D-2}} h'(r') \d{r'} + \text{const} \right) \label{f1} \\
+%&= \frac{2}{n+2} \frac{M}{M_*^{D-2}} \frac{1}{\Omega_{D-2}} \frac{1}{r^{D-2}} h(r)
+&=\frac{2}{n+2} \frac{M}{M_*^{n+2}} \frac{1}{\Omega_{n+2}} \highlight{\frac{h(r)}{r^{n+1}} } \label{f2}
+\end{align}
+
+We note that the units are correct. With $h(r)=\theta(r)$ (in \ref{f1}, $h(r)=1$ in \ref{f2}), the result gets the proper Schwarzschild-Tangherlini result $f(r) \propto 1/r^{D-3} = 1/r^{n+1}$.
+
+\newpage
+\subsection{Getting $r_H$}
+
+Rizzo already made a lot of effort to calculate $r_H$ at $g_{00}=0$, that is, $f(r_H)=1$. The bottom line is that there are no more closed form solutions in the models he explored (NC, Lorentzian). Rizzo writes the horizon equation $f(r_H)=1$ as
+
+\begin{equation}
+\begin{aligned}
+m&=M/M_*      &\qquad y&=M_* \sqrt{\theta} &\qquad c_n&\approx (n+2)\Omega_{n+2}  \\
+x&=M_* R_H    &\quad z&=x/y=R_H/\sqrt{\theta}   &\qquad \highlight{x^{n+1}} &= \highlight{\frac{m}{c_n} F_n(z)}
+\end{aligned}
+\end{equation}
+
+He lists possible $\delta(r)$ modeling expressions $\rho(r)$ and the functions $F_n(z)$ to be discussed. I added the two holography ones.
+
+\begin{center}
+  \begin{tabular}{ llll }
+   \firsthline
+   Label & $\rho(r)$ & $F_n(z)$ \\
+    \hline \\
+    $D$ dim NC (Rizzo2006) & $\displaystyle \rho = \frac{M}{(4\pi\theta)^{(n+3)/2}} e^{-r^2/4\theta}$ &  $\displaystyle F_n(z)=\frac{1}{\Gamma\left(\frac{n+3}{2}\right)} \gamma\left( \frac{n+3}{2} ; \frac{z^2}{4} \right)$   \\[3ex]
+    Lorentzian (Rizzo2006) & $\displaystyle \rho \sim \frac{1}{(r^2 + L^2)^{\frac{n+4}{2}}}$ &  $\displaystyle G_n(z) = \frac{2}{\pi} \frac{(n+2)!!}{(n+1)!!} \int_0^z \d t \frac{t^{n+2}}{(1+t^2)^{(n/2+2)}}$ \\[3ex]
+    $D$ dim Holography & $\displaystyle \rho = \frac{M}{\Omega_{n+2} r^{n+2}} h'(r)$ & $\displaystyle \highlight{H_n(r) = h(r)}$ \\[3ex]
+    $D$ dim NS2011 $ h=\frac{r^2}{r^2+L^2}$\qquad & $\displaystyle \rho=\frac{M}{\Omega_{n+2}}\frac{1}{r^{n+1}}\frac{L^2}{(L^2 + r^2)^2}$\qquad\qquad & $\displaystyle H_n(z)=\frac{z^2}{z^2 + 1}$ with $\sqrt{\theta}=L$ \\[3ex]
+    \hline
+  \end{tabular}
+\end{center}
+
+Rizzo claims that all $\rho$ models behave quite similary. I wonder if his Lorentzian approach would be the right $D$ dimensional extension to NS2011. All my holography functions lack a dependence of $n$.
+
+\subsection{Open Questions}
+
+\begin{itemize}
+\item How to choose $\rho(r)$? Toy model or physical motivation? Where is the motivation?
+
+\item How much degrees of freedom in $\rho(r)$ choice? \\ How to match $r_0 = l_*$, $M_0 = M_*$, $G=M^{1-m}_*$?
+
+\item {\it What} to do with the calculated quantities {\it Horizons}, {\it Hawking Temperature}, {\it surface energy density}, {\it heat capacity}?
+
+
+\end{itemize}
+
+
+
+
+
+
+
+
+% Literaturangaben
+%\renewcommand{\refname}{Quellen}
+%\begin{thebibliography}{99}
+%\bibitem{Buch} W. Buckel, R. Kleiner: {\it Supraleitung}, Wiley-VHC
+%\end{thebibliography}
+\end{document}

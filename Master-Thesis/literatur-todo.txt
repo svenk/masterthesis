@@ -1,0 +1,25 @@
+
+% bibtex kommentar sobald AT weg ist!
+//online{bla,
+	author = "bla",
+	year = 2005
+	title=
+	publisher=
+	url=
+	cited={Sept 2014},
+	format={scientific magazine}
+}
+
+%//newspaperarticle{kamajian,
+%  author    = {Bekenstein, Jacob D. and Kamajian, Alfred T.},
+%  day       = {17},
+%  month     = {December},
+%  newspaper = {Scientific American},
+%  title     = {Information in the Holographic Universe},
+%  year      = {2005},
+%  pages = "...",	
+%  cited     = "September 2014",
+
+%}
+
+

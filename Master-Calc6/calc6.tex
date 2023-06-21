@@ -1,0 +1,190 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+%\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc6 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\section{The surface issue}
+These calculations point out a missing surface term when doing the plausibility check for the holographic approach done in [NS11.2013].
+
+I work in $D=4+n$ dimensions, but any equation must hold for $n=0$, too. I follow the Rizzo2006 deviation (also performed in Calc1) for deriving an ODE for the potential $V(r)$ in $g_{00}=1-V(r)$ SMM like metrics. Having given only $\rho(r)$, the continuity equation $T^{AB}_{;B}=0$ gives
+\begin{equation}
+T_i^i = \rho + \frac{r}{n+2} \partial_r \rho.
+\end{equation}
+Which then lead to the first order differential equation
+\begin{equation}
+V' + \frac{n+1}{r} V = \frac{1}{M_*^{n+2}} \frac{2r\rho}{n+2}. \label{ode}
+\end{equation}
+The Ansatz $V(r)=r^{-(n+1)}\left( C \int^r x^2 \rho(x) \d x + D\right)$ solves equation \ref{ode}. It is simple to derive, as done in Calc3 and Calc4,
+\begin{equation}
+V(r) = \frac{1}{r^{n+1}} \left( \frac{2}{(n+2)M_*^{n+2}} \int_{c_1}^r x^{n+2} \rho(x) \d x + c_2 \right). \label{sol}
+\end{equation}
+
+It is important to remark that the integral in \ref{sol} only looks like the radial part of an partially performed spherical integration, but {\it there is no surface term}, as there would be if the integral really would be $m(r)=\int \d^{n+3}~ \vec{r} ~\rho(\vec r)$. That is,
+
+\begin{equation}
+\int \d^{n+3} \vec{r} ~\rho(\vec{r}) = \int \d r ~\left( \Omega_{n+2} r^{n+2} \right)~ \rho(r), \label{reg}
+\end{equation}
+
+With $\Omega_{n+2}r^{n+2}$ being the $(n+2)$ dimensional surface (of an ${n+3}$ dimensionall sphere)
+
+\begin{equation}
+%\displaystyle
+\Omega_{n+2} = 2 \frac{\pi^\frac{n+3}{2}}{\Gamma\left(\frac{n+3}{2}\right)}
+\end{equation}
+
+The missing $\Omega_{n+2}$ in eq. \ref{sol} compared to \ref{reg} stands out. This is important, because the holographic approach depends on that property of \ref{reg}.
+
+\subsection{NC in $D$ dim}
+Rizzo introduces the reduced Planck scale $M_*$ by $M_P^2 = V_n M_*^{n+2}$, with $v_n = (2 \pi R_c)^n$ the volume of the compacted dimensions as tori with radius $R_c$. Thus the $n\to 0$ limit gives $M_*^2 = M_P^2 = 1 / G$.
+
+%The properties of the gaussian $\rho(r)$ enable $V(r)$ to kill the surface term $\Omega_{n+2}$ in the $n\to 0$ limit, since it looks like [Rizzo $A(r)$]
+
+Using the gaussian $\rho(r)$, Rizzo (and I in Calc3) got
+
+\begin{equation}
+V(r) = \frac{M}{M_*^{n+2}} \frac{1}{(n+2) \pi^{(n+3)/2}} \frac{1}{r} \Gamma\left( \frac{3+n}{2} ; \frac{r^2}{4 \theta} \right)
+\end{equation}
+
+In the $\theta,n \to 0$ limit, $\Gamma(\frac{3}{2}; \infty) = \sqrt{\pi}/2$ and therefore we end with
+
+\begin{equation}
+V(r) = \frac{GM}{4 \pi r }
+\end{equation}
+
+\subsection{$h(r)$ Profile}
+In [NS 07.11.2013], the $\theta \to h(r)$ smearing function is introduced, so $\partial_r \theta = \delta \to \partial_r h$ enters a smeared density:
+
+\begin{equation}
+\rho(r) = \frac{M}{4 \pi r^2} \dd{h}{r}
+\quad \xrightarrow{\text{D=n+2 dimensions}} \quad
+\rho(r) = \frac{M}{\Omega_{n+2} r^{n+2}} \dd{h}{r}
+\end{equation}
+
+Since $\Omega_{2} = 4\pi$, this seems to be true. I showed already in Calc2 that an integration (like in eq~\ref{reg}) over that class of $\rho(r)$ gets trivial in {\it any} dimension.
+
+Lets apply the solution for $V(r)$ at this density. Since that integration is not a {\it full} one, it allows the surface constant $\Omega_{n+2}$ to enter the metric. We end up with (already showed in Calc4)
+
+\begin{equation}
+V(r) = \frac{2}{n+2} \frac{M}{M_*^{n+2}} \highlight{\frac{1}{\Omega_{n+2}}} \frac{h(r)}{r^{n+1}}.
+\end{equation}
+
+This equation cannot produce the SMM value $V(r) = \frac{2GM}{r}$ any more, because nothing kills the $\Omega_2=4\pi$. Indeed, if we use the Schwarzschild-Tangherlini density $\rho(r) = M / (\Omega_{n+2}) \delta(r)$ and apply it to eq. \ref{sol}, [Reall-Review Section 3.2]
+
+\begin{equation}
+V(r) = \frac{1}{r^{n+1}} \left( \frac{2}{(n+2) M_*^{n+2}} \frac{M}{\Omega_{n+2}} \int \d r \delta(r) \right) = \frac{\mu}{r^{n+2}}, \quad \mu = \frac{16\pi G M}{(n+2) \Omega_{n+2}} \label{ST}
+\end{equation}
+
+{\bf TODO: Why $\mu$?}. If we now send $n \to 0$, this does not reproduce SMM at all.
+
+The Planck length $M_P^2 = V_n  M_*^{n+2}$ is equal to $M_*$ in $n=0$ dimensions. Since $M_P = 1/\sqrt{G}$ Newtons constant $G = 1/M_*^2$ is restored. Thus, from eq. \label{ST} we get for $n=0$
+
+\begin{equation}
+V(r) = \frac{GM}{r}\frac{1}{4\pi}
+\end{equation}
+
+Conclusion: There seems always the factor {$8\pi$} to be missing. There seems to be some $G~\leftrightarrow~8\pi G$ issue.
+
+
+\end{document}

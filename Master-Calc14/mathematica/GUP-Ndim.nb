@@ -1,0 +1,405 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 9.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     13566,        396]
+NotebookOptionsPosition[     12589,        356]
+NotebookOutlinePosition[     12926,        371]
+CellTagsIndexPosition[     12883,        368]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["GUP in N-4 LXDs", "Title",
+ CellChangeTimes->{{3.610183496420912*^9, 3.610183504076914*^9}}],
+
+Cell[TextData[{
+ "Nach PN-Unterredung 27. Mai vormittags widme ich mich bis Anfang Juni mal \
+dem Verhalten des Impulsintegrals bei ndim-Erweiterung von GUP-Modellen. Das \
+hat also gar nichts mit Holo oder ",
+ Cell[BoxData[
+  FormBox[
+   SubscriptBox["h", "\[Alpha]"], TraditionalForm]],
+  FormatType->"TraditionalForm"],
+ " zu tun. Achtung auch, N ist nicht die Anzahl der Extradimensionen."
+}], "Text",
+ CellChangeTimes->{{3.610183510451662*^9, 3.610183571804265*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["1. Die Metrik", "Section",
+ CellChangeTimes->{{3.6101835788932657`*^9, 3.6101835807251797`*^9}, {
+  3.610183838870481*^9, 3.6101838391595182`*^9}}],
+
+Cell["\<\
+Zun\[ADoubleDot]chst versuche ich den Plot nachzuvollziehen, der auf dem \
+Knipfer-PrePreprint auf Seite 9 (Figure 2) steht.\
+\>", "Text",
+ CellChangeTimes->{{3.610183588982326*^9, 3.610183614788834*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"AN", "[", "N_", "]"}], " ", "=", " ", 
+   FractionBox[
+    RowBox[{"2", 
+     SuperscriptBox["Pi", 
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"N", "+", "1"}], ")"}], "/", "2"}]]}], 
+    RowBox[{"Gamma", "[", 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"N", "+", "1"}], ")"}], "/", "2"}], "]"}]]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"f", "[", 
+   RowBox[{"r_", ",", "\[Beta]_", ",", "N_", ",", "Meff_"}], "]"}], " ", "=", 
+  " ", 
+  RowBox[{"1", "  ", "-", " ", 
+   RowBox[{
+    FractionBox[
+     RowBox[{"16", " ", "Pi", " ", "Meff"}], 
+     RowBox[{
+      RowBox[{"(", 
+       RowBox[{"N", "-", "1"}], ")"}], " ", 
+      RowBox[{"AN", "[", 
+       RowBox[{"N", "-", "1"}], "]"}], " ", 
+      SuperscriptBox["r", 
+       RowBox[{"N", "-", "2"}]]}]], "  ", "*", " ", 
+    RowBox[{"(", 
+     RowBox[{"1", " ", "-", " ", 
+      RowBox[{
+       FractionBox[
+        SuperscriptBox["2", 
+         RowBox[{"1", "-", 
+          RowBox[{"N", "/", "2"}]}]], 
+        RowBox[{"Gamma", "[", 
+         RowBox[{"N", "/", "2"}], "]"}]], "  ", 
+       SuperscriptBox["\[Beta]", 
+        RowBox[{
+         RowBox[{"-", "N"}], "/", "4"}]], " ", 
+       SuperscriptBox["r", 
+        RowBox[{"N", "/", "2"}]], " ", 
+       RowBox[{"BesselK", "[", 
+        RowBox[{
+         RowBox[{"N", "/", "2"}], ",", " ", 
+         RowBox[{"r", "/", 
+          RowBox[{"Sqrt", "[", "\[Beta]", "]"}]}]}], "]"}]}]}], 
+     ")"}]}]}]}]}], "Input",
+ CellChangeTimes->{{3.6101806551850843`*^9, 3.610180730026493*^9}, {
+   3.610180817009816*^9, 3.610180878409521*^9}, {3.61018093505938*^9, 
+   3.610180989109603*^9}, {3.61018125665623*^9, 3.610181265520997*^9}, 
+   3.610181297025429*^9, {3.610181393066135*^9, 3.610181440474455*^9}}],
+
+Cell[BoxData[
+ RowBox[{"1", "-", 
+  FractionBox[
+   RowBox[{"8", " ", "Meff", " ", 
+    SuperscriptBox["\[Pi]", 
+     RowBox[{"1", "-", 
+      FractionBox["N", "2"]}]], " ", 
+    SuperscriptBox["r", 
+     RowBox[{"2", "-", "N"}]], " ", 
+    RowBox[{"(", 
+     RowBox[{"1", "-", 
+      FractionBox[
+       RowBox[{
+        SuperscriptBox["2", 
+         RowBox[{"1", "-", 
+          FractionBox["N", "2"]}]], " ", 
+        SuperscriptBox["r", 
+         RowBox[{"N", "/", "2"}]], " ", 
+        SuperscriptBox["\[Beta]", 
+         RowBox[{
+          RowBox[{"-", "N"}], "/", "4"}]], " ", 
+        RowBox[{"BesselK", "[", 
+         RowBox[{
+          FractionBox["N", "2"], ",", 
+          FractionBox["r", 
+           SqrtBox["\[Beta]"]]}], "]"}]}], 
+       RowBox[{"Gamma", "[", 
+        FractionBox["N", "2"], "]"}]]}], ")"}], " ", 
+    RowBox[{"Gamma", "[", 
+     FractionBox["N", "2"], "]"}]}], 
+   RowBox[{
+    RowBox[{"-", "1"}], "+", "N"}]]}]], "Output",
+ CellChangeTimes->{{3.610180948517692*^9, 3.610180989347025*^9}, 
+   3.610181265858263*^9, 3.610181297919847*^9, 3.610181403912022*^9, {
+   3.6101814339668703`*^9, 3.610181440747849*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"f", "[", 
+      RowBox[{"x", ",", "\[Beta]", ",", "N", ",", "Meff"}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"x", ",", "0.01", ",", "10"}], "}"}], ",", 
+     RowBox[{"PlotRange", "\[Rule]", " ", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"-", "2.5"}], ",", "1"}], "}"}]}], ",", 
+     RowBox[{"ImageSize", "\[Rule]", " ", "Large"}]}], "]"}], ",", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0.5"}], "}"}], ",", "0", ",", "3"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"N", ",", "3", ",", "7", ",", "1"}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"Meff", ",", "0.2", ",", "6"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.6101809960763597`*^9, 3.6101811097950697`*^9}, {
+   3.610181151006261*^9, 3.6101812122116623`*^9}, {3.61018127013743*^9, 
+   3.6101812856792927`*^9}, 3.610181363160446*^9}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{$CellContext`Meff$$ = 4.34, N$$ = 
+    5, $CellContext`\[Beta]$$ = 0.6900000000000001, Typeset`show$$ = True, 
+    Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Beta]$$], 0.5}, 0, 3}, {
+      Hold[N$$], 3, 7, 1}, {
+      Hold[$CellContext`Meff$$], 0.2, 6}}, Typeset`size$$ = {
+    576., {177., 181.}}, Typeset`update$$ = 0, Typeset`initDone$$, 
+    Typeset`skipInitDone$$ = True, $CellContext`\[Beta]$43212$$ = 0, 
+    N$43213$$ = 0, $CellContext`Meff$43214$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, 
+      "Variables" :> {$CellContext`Meff$$ = 0.2, N$$ = 
+        3, $CellContext`\[Beta]$$ = 0.5}, "ControllerVariables" :> {
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$43212$$, 0], 
+        Hold[N$$, N$43213$$, 0], 
+        Hold[$CellContext`Meff$$, $CellContext`Meff$43214$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        $CellContext`f[$CellContext`x, $CellContext`\[Beta]$$, 
+         N$$, $CellContext`Meff$$], {$CellContext`x, 0.01, 10}, 
+        PlotRange -> {-2.5, 1}, ImageSize -> Large], 
+      "Specifications" :> {{{$CellContext`\[Beta]$$, 0.5}, 0, 3}, {
+        N$$, 3, 7, 1}, {$CellContext`Meff$$, 0.2, 6}}, "Options" :> {}, 
+      "DefaultOptions" :> {}],
+     ImageSizeCache->{623., {278., 285.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{{3.610181007658669*^9, 3.610181064307457*^9}, 
+   3.610181111335156*^9, {3.610181152055723*^9, 3.6101811575443*^9}, {
+   3.610181190246518*^9, 3.610181212460038*^9}, {3.610181286296232*^9, 
+   3.610181298919759*^9}, 3.61018136387239*^9, 3.610181443720356*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["2. Die Besselfunktion", "Section",
+ CellChangeTimes->{{3.610183841271039*^9, 3.610183845031733*^9}}],
+
+Cell["\<\
+Wie sieht eigentlich die BesselK-Funktion aus? Steigt sie st\[ADoubleDot]rker \
+als Exponentiell?\
+\>", "Text",
+ CellChangeTimes->{{3.610183848431568*^9, 3.61018386201546*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Series", "[", 
+    RowBox[{
+     RowBox[{"BesselK", "[", 
+      RowBox[{
+       RowBox[{"N", "/", "2"}], ",", " ", 
+       RowBox[{"r", "/", 
+        RowBox[{"Sqrt", "[", "\[Beta]", "]"}]}]}], "]"}], " ", ",", 
+     RowBox[{"{", 
+      RowBox[{"r", ",", "1", ",", "6"}], "}"}]}], "]"}], " ", "/.", " ", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"N", "\[Rule]", " ", "2"}], ",", 
+     RowBox[{"\[Beta]", "\[Rule]", " ", "1"}]}], "}"}]}], " ", "//", 
+  "N"}]], "Input",
+ CellChangeTimes->{{3.610182893323943*^9, 3.6101829490815163`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[
+  RowBox[{"0.6019072301972347`", "-", 
+   RowBox[{"1.022931668437943`", " ", 
+    RowBox[{"(", 
+     RowBox[{"r", "-", "1.`"}], ")"}]}], "+", 
+   RowBox[{"1.1133730644162063`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"r", "-", "1.`"}], ")"}], "2"]}], "-", 
+   RowBox[{"1.0832259324234519`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"r", "-", "1.`"}], ")"}], "3"]}], "+", 
+   RowBox[{"1.0481405625700595`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"r", "-", "1.`"}], ")"}], "4"]}], "-", 
+   RowBox[{"1.0280769882301517`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"r", "-", "1.`"}], ")"}], "5"]}], "+", 
+   RowBox[{"1.0178805931315098`", " ", 
+    SuperscriptBox[
+     RowBox[{"(", 
+      RowBox[{"r", "-", "1.`"}], ")"}], "6"]}], "+", 
+   InterpretationBox[
+    SuperscriptBox[
+     RowBox[{"O", "[", 
+      RowBox[{"r", "-", "1.`"}], "]"}], "7"],
+    SeriesData[$CellContext`r, 1., {}, 0, 7, 1],
+    Editable->False]}],
+  SeriesData[$CellContext`r, 1., {0.6019072301972347, -1.022931668437943, 
+   1.1133730644162063`, -1.0832259324234519`, 
+   1.0481405625700595`, -1.0280769882301517`, 1.0178805931315098`}, 0, 7, 1],
+  Editable->False]], "Output",
+ CellChangeTimes->{{3.610182895259573*^9, 3.610182949314344*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Manipulate", "[", 
+  RowBox[{
+   RowBox[{"Plot", "[", 
+    RowBox[{
+     RowBox[{"BesselK", "[", 
+      RowBox[{
+       RowBox[{"N", "/", "2"}], ",", " ", 
+       RowBox[{"r", "/", 
+        RowBox[{"Sqrt", "[", "\[Beta]", "]"}]}]}], "]"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"r", ",", "0", ",", "10"}], "}"}]}], "]"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"\[Beta]", ",", "0.5"}], "}"}], ",", "0", ",", "3"}], "}"}], 
+   ",", 
+   RowBox[{"{", 
+    RowBox[{"N", ",", "3", ",", "7", ",", "1"}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.610182959737596*^9, 3.610182973821911*^9}}],
+
+Cell[BoxData[
+ TagBox[
+  StyleBox[
+   DynamicModuleBox[{N$$ = 3, $CellContext`\[Beta]$$ = 1.69, Typeset`show$$ = 
+    True, Typeset`bookmarkList$$ = {}, Typeset`bookmarkMode$$ = "Menu", 
+    Typeset`animator$$, Typeset`animvar$$ = 1, Typeset`name$$ = 
+    "\"untitled\"", Typeset`specs$$ = {{{
+       Hold[$CellContext`\[Beta]$$], 0.5}, 0, 3}, {
+      Hold[N$$], 3, 7, 1}}, Typeset`size$$ = {360., {111., 117.}}, 
+    Typeset`update$$ = 0, Typeset`initDone$$, Typeset`skipInitDone$$ = 
+    True, $CellContext`\[Beta]$53043$$ = 0, N$53044$$ = 0}, 
+    DynamicBox[Manipulate`ManipulateBoxes[
+     1, StandardForm, "Variables" :> {N$$ = 3, $CellContext`\[Beta]$$ = 0.5}, 
+      "ControllerVariables" :> {
+        Hold[$CellContext`\[Beta]$$, $CellContext`\[Beta]$53043$$, 0], 
+        Hold[N$$, N$53044$$, 0]}, 
+      "OtherVariables" :> {
+       Typeset`show$$, Typeset`bookmarkList$$, Typeset`bookmarkMode$$, 
+        Typeset`animator$$, Typeset`animvar$$, Typeset`name$$, 
+        Typeset`specs$$, Typeset`size$$, Typeset`update$$, Typeset`initDone$$,
+         Typeset`skipInitDone$$}, "Body" :> Plot[
+        BesselK[
+        N$$/2, $CellContext`r/Sqrt[$CellContext`\[Beta]$$]], {$CellContext`r, 
+         0, 10}], 
+      "Specifications" :> {{{$CellContext`\[Beta]$$, 0.5}, 0, 3}, {
+        N$$, 3, 7, 1}}, "Options" :> {}, "DefaultOptions" :> {}],
+     ImageSizeCache->{407., {168., 175.}},
+     SingleEvaluation->True],
+    Deinitialization:>None,
+    DynamicModuleValues:>{},
+    SynchronousInitialization->True,
+    UnsavedVariables:>{Typeset`initDone$$},
+    UntrackedVariables:>{Typeset`size$$}], "Manipulate",
+   Deployed->True,
+   StripOnInput->False],
+  Manipulate`InterpretManipulate[1]]], "Output",
+ CellChangeTimes->{3.610182974309473*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{1129, 859},
+WindowMargins->{{50, Automatic}, {Automatic, 44}},
+FrontEndVersion->"9.0 for Linux x86 (64-bit) (February 7, 2013)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 98, 1, 93, "Title"],
+Cell[680, 25, 471, 10, 51, "Text"],
+Cell[CellGroupData[{
+Cell[1176, 39, 153, 2, 81, "Section"],
+Cell[1332, 43, 214, 4, 31, "Text"],
+Cell[CellGroupData[{
+Cell[1571, 51, 1780, 53, 120, "Input"],
+Cell[3354, 106, 1145, 34, 103, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4536, 145, 969, 25, 55, "Input"],
+Cell[5508, 172, 2325, 45, 580, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7882, 223, 106, 1, 81, "Section"],
+Cell[7991, 226, 186, 4, 31, "Text"],
+Cell[CellGroupData[{
+Cell[8202, 234, 584, 17, 32, "Input"],
+Cell[8789, 253, 1323, 36, 58, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[10149, 294, 644, 19, 32, "Input"],
+Cell[10796, 315, 1753, 36, 360, "Output"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

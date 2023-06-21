@@ -1,0 +1,324 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc9 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\newcommand{\pp}[2]{\frac{\partial #1}{\partial #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+
+\begin{multicols}{2}
+Calc9 ties up to Calc7, making more calculations with the holographic models. I clean up the syntax for $H\in \{h, h_\alpha\}$ and work with dimensionless quantities $z=r/L$. Furthermore I derive formulas from the general to the specific.
+
+\columnbreak
+\tableofcontents
+\end{multicols}
+
+\section{Heat capacity and Entropic corrections}
+This is the first document where I propose a $D=n+4$ dimensional extension to the holographic model $h(r)$. The self-regular model $h_\alpha(r)$ was already discussed in Calc7.
+
+\begin{align}
+h(r) &= \frac{r^{2+n}}{r^{2+n} + L^{2+n}} \label{eq:holo} \\
+h'(r) &= \frac{(2+n)~ r^{1+n} L^{2+n}}{(r^{2+n} + L^{2+n})^2} \\
+h_\alpha(r) &= \frac{r^{3+n}}{(r^\alpha + L^\alpha/2)^{\frac{3+n}{\alpha}}} \label{eq:selfreg} \\
+h'_\alpha(r) &= \frac{(n+3) L^{\alpha } r^{n+2}
+   \left(\frac{L^{\alpha
+   }}{2}+r^{\alpha
+   }\right)^{-\frac{n+3}{\alpha
+   }}}{L^{\alpha }+2 r^{\alpha
+   }}
+\end{align}
+
+Let $H \in \{h, h_\alpha\}$ be a generic profile as approximation of the theta function $\Theta(r)$ in $\rho(r)$, a class of densities for which I frequently derived the metric $g_{00}=1-V(r)$:
+
+\begin{equation}
+\rho(r) = \frac M {\Omega_{n+2}} \dd{H(r)}r \quad\Rightarrow\quad
+V(r) = \frac{2}{n+2} \frac{M}{M_*^{n+2}} {\frac{1}{\Omega_{n+2}}} \frac{H(r)}{r^{n+1}}.  \label{eq:start}
+\end{equation}
+
+\subsection{The Mass}
+We can argue that $M$ is just a constant, responsible for fulfilling the horizon equation $V(r_H)=1$. If we set (»arbitrarily«)
+
+\begin{equation}
+M = \frac{n+2}{2} M_*^{n+2} \Omega_{n+2} \frac{r_H^{n+1}}{H(r_H)} 
+= \frac{n+2}{2} ~\Omega_{n+2}~ \frac{1}{H(r_H)} \left( \frac{r_H}{L_*} \right)^{n+1} ~M_*
+ \label{eq:M}
+\end{equation}
+
+then the horizon equation $V(r)=0$ is fulfilled at $r=r_H$. In general, equation \ref{eq:M} gives us a relationship $M=M(r)$. It can be used for given $r$ to get the mass neccessary to create an event horizon at that $r$. In Calc7, I used it already for determining the remnant mass at $r=r_0$, in such a way that $M = M_*$ was obtained and $r_0 = L_*$ could be identified. Eventually, in models with (further) degrees of freedom (like $H=h_\alpha$), that equation also fixed $\alpha$.
+
+In particular, for $n=0$, eq. \ref{eq:M} reduces to $M = r_H / 2 L^2 h(r_H)$. For $H = h$, we end with the well known $M= (r^2 + L^2) / 2L^2 r$ from [NS 06.11.2013].
+
+\subsection{Dimensionless notation}
+My models $H(r)$ can be expressed in units of the dimensionless variable $z=r/L$ (which may be interpreted as »Multiples of the Planck unit«):
+
+\begin{align}
+h(z) &= 1/(1 + (1/z)^{2+n}) \\
+h_\alpha(z) &= 1/(1+ (1/z)^\alpha / 2)^{(n+3)/\alpha}
+\end{align}
+
+The derivative $\dd{}{r}$  can be replaced by $\propto \dd{}{z}$ by determining $\dd{f}{r}=\dd{f}{z}\dd{z}{r}=\frac 1L\dd{f}{z}$. We write $f'(z)$ for $\partial_z f(z)$:
+
+\begin{align}
+h'(z) &= (2+n) h^2(z) / z^{3+n}
+\end{align}
+
+All quantities $Q \in \{g_{00}, V, M, T_H, C, S, \dots \}$ can be written in units of $z$. If $[Q] = L^k$ is the unit of $Q$ (that is, the $k$th power of length which equals the $-k$ths power of energy), a seperation
+
+\begin{equation}
+Q(r) = L^k \tilde{Q}(z)
+\end{equation}
+
+is always possible, with $[\tilde Q] = 1$. This can be checked, let's write some already derived expressions in terms of $z$:
+
+\begin{align}
+V(z) &= \frac{2}{n+2} \frac{M}{M_*} \frac{L^{n+1}}{M_*^{n+1}} \frac 1{\Omega_{n+2}} \frac{H(z)}{z^{n+1}}. 
+&[V]=1  \quad\quad V(r)&=V(z) \\
+M(z) &= \frac{n+2}{2} ~\Omega_{n+2}~ \frac{z_H^{n+1}}{H(r_H)} \left( \frac{M_*}{L} \right)^{n+1} ~M_* 
+&[M]=1/L \quad\quad  M(r)&=M(z) \dots
+\end{align}
+
+\subsection{Extremal Radius and Remnants}
+For $h_\alpha$, this section was discussed in Calc7. For $h$ it is new.
+
+The extremal radius equation $\partial_r g_{00} = \nicefrac 1L~\partial_z g_{00} = 0$ can be written as
+
+\begin{equation}
+0 =  \dd{H(z)}{z} - (n+1) \frac{H(z)}{z},
+\end{equation}
+
+an expression which looks like the one derived in Calc7, only by replacing $r\to z$. After inserting $H(z)=h(z)$, the expression $
+0 = (n+2) \frac{h^2}{z^{3+n}} - (n+1) \frac{h}{z}$ can be easily solved, giving
+
+\begin{equation}
+\highlight{ r_0 = L~z_0 = L~\left(\frac{1}{1+n}\right)^{\frac{1}{2+n}} }
+\end{equation}
+
+We can enforce the holographic metric to have the event horizon at $r_H=r_0$. Using (\ref{eq:M}), this gives us
+
+\begin{equation}
+M(r_0) = \frac{n+2}2 \underbrace{\Omega_{n+2}}_\text{ignored} \underbrace{(n+2)}_{1/h(r_0)} \left(\frac{r_0^{n+1}}{L_*^{n+1}} \right)~M_*
+\end{equation}
+
+So unlike for $h_\alpha$, no self encoding $M(r_0)=M_*$ can take place since $\frac{(n+2)^2}2 \neq 1$.
+
+
+\subsection{The Heat Capacity}
+Equation \ref{eq:M} is important for determining the heat capacity, when using the expression
+
+\begin{equation}
+C = \pp{M}{T_H} = \pp{M}{r_H}\left(\pp{T_H}{r_H}\right)^{-1} \label{eq:C}
+\end{equation}
+
+Actually it would be nice to have a closed form expression $T_H = T_H(M)$ but it is hard to become, sagt Nicolini. For calculating $C$ in terms of $z$, we simply write
+
+\begin{equation}
+C = \pp M{T_H} = \pp{M}{z_H} \left(\pp{T_H}{z_H}\right)^{-1}
+\end{equation}
+
+Expressions could also be mixed in $r$ and $z$. Nothing special about that:
+
+\begin{equation}
+C = \pp{M}{r_H} \pp{r_H}{z_H} \pp{z_H}{T_H} = L ~\pp M{r_H} \left( \pp{T_H}{z_H} \right)^{-1}
+\end{equation}
+
+\subsection{The Entropy}
+The Black hole entropy integral can be rewritten in the same way like the Heat Capacity was rewritten in equation \ref{eq:C}:
+
+\begin{equation}
+S(r) = \int^{M_2}_{M_1} \frac{\d M}T = \int_{r_1}^{r_2} \dd M{r_H} \frac {\d r_H}T = \int \d r_H \frac 1T \left( \dd{M(r_H)}{r_H} \right)
+\end{equation}
+
+This allows me to reproduce the NS2011 result, using $H=h$, $n=0$:
+
+\begin{align}
+\dd{M}{r_H} &= \dd {}r \left( \frac{1}{2L^2 r} (r^2 + L^2) \right) = \frac 12 \left( \frac 1{L^2} + \frac 1{r^2} \right) \\
+T &= \frac 1{4\pi r_H} \left( 1 - \frac{2 L^2}{r_H^2 + L^2} \right) \\
+S &= 4\pi \int_L^{r_H} r \left(\frac r{2L^2} + \frac 1{2r}\right) \frac 1{1 - \frac{2 L^2}{r^2 + L^2} }
+= \pi  \left(\frac{r^2}{L^2}+2 \log (r)\right)_L^{r_H}
+\end{align}
+
+Like always, $S(r)=S(z)$ since $[S]=1$ in natural units:
+
+\begin{equation}
+S(z) = \int^{z_2}_{z_1} \frac{\d M}T = \int \d z_H \frac 1T \left( \dd{M(z_H)}{z_H} \right)
+\end{equation}
+
+\subsection{A generic approach to $T_H$, $C$ and $S$}
+By merging all constant (non-$r$ dependent) terms in the metric (\ref{eq:start}) and mass term (\ref{eq:M}), generic calculations with any $H$ and $n$ can be performed in a very simple way.
+
+To do these calculations, let's shortly forget about $H$ and just seperate $V(r)$ in a suggestive way:
+
+\begin{align}
+V(r) &= M(r_H) \cdot Y(r) \label{eq:simpleV} \\
+M(r_H) &= Y^{-1}(r_H)% \quad\quad\leftarrow\text{this does }\textbf{not}\text{ say } M=Y^{-1}
+\label{eq:simpleM} \\
+T &= \frac{1}{4\pi} \left. \partial_r g_{00} \right|_{r=r_H} = - \frac{1}{4\pi} V'(r_H)  \\
+&= - \frac{1}{4\pi} M(r_H) \cdot Y'(r_H) = - \frac{1}{4\pi}\frac 1L M(z_H) Y'(z_H)  \\
+S(z) &= \int^z \d z_H \frac {M'(z_H)}T 
+ =  -4\pi L \int^z \d z_H\frac{M'(z_H)}{M(z_H)} \frac  1{Y'(z_H)} 
+\end{align}
+
+It is important to note that (\ref{eq:simpleM}) is only valid for $r_H$, so $Y$ is not the inverse of $M$ and the inverse derivative law cannot be applied (in general, $M(r) \neq Y^{-1}(r)$). In terms of $r$, M is constant: $M'(r) = 0$.
+
+We can now introduce the holographic approach
+
+\begin{equation}
+Y(r)=A \frac{H}{r^{n+1}}
+\end{equation}
+
+$A$ can be eliminated quickly in $T$ due to the property of (\ref{eq:simpleM}).
+
+\begin{align}
+V &= A~M(r_H)~\frac{H(r)}{r^{n+1}} \\
+M(r_H) &= \frac{1}{A} \frac{r_H^{n+1}}{H(r_H)} \\
+T &= \frac{1}{4\pi r_H} \left( 1 + n - r_H \frac{H'(r_H)}{H(r_H)} \right)
+ = \frac 1L \frac{1}{4\pi z_H} \left( 1 + n - z_H \frac{H'(z_H)}{H(z_H)} \right)
+ \label{eq:simpleT} \\
+\label{eq:simpleC} C &=  %\pp{M}{r_H}\left(\pp{T_H}{r_H}\right)^{-1} =
+\frac{4\pi r_H^{n+2}}{A}
+\frac{r_H H'\left(r_H\right)-(n+1) H\left(r_H\right)}
+   {r_H^2 H\left(r_H\right)
+   H''\left(r_H\right)-r_H^2 H'\left(r_H\right){}^2+(n+1) H\left(r_H\right){}^2} \\
+S(z) &= -4\pi L \int^z \d x \left( \frac {n+1}x - \frac {H'(x)}{H(x)} \right) \frac 1{Y'(x)} \\
+&= -4 \pi LA \int^z \d x \left( \frac {n+1}x - \frac {H'(x)}{H(x)} \right)
+\frac{x^{n+2}}{x H'(x) - (n+1) H(x)}  \label{eq:Sgeneric} 
+\end{align}
+
+The simple relation (\ref{eq:simpleT}) was already asserted in Calc7, eq. 20, but not believed yet. Writing terms in $z$ is handy because the resulting terms are dimensionless. Attached powers of $L$ entirely indicate the physical units of quantities, like $[T]=[1/L]$.
+
+\subsubsection{Check with $n=0$}
+I checked that, with $n=0, H=h$, (\ref{eq:simpleT}) and (\ref{eq:simpleC}) gives the [NS 06.11.2013] result
+
+\begin{align}
+T &= \frac{1}{4 \pi r}\left( 1 - \frac{2 L^2}{L^2 + r_H^2} \right) \\
+C &= % TeXForm von GenericCapacity.nb
+- 4 \pi \frac{\left(L-r_H\right) \left(r_H+L\right) \left(r_H^2+L^2\right){}^2}{2 L^2 \left(4 L^2 r_H^2-r_H^4+L^4\right)}
+\end{align}
+
+Therefore I claim (\ref{eq:simpleT}) and (\ref{eq:simpleC}) to be true.
+
+\subsubsection{Values for $h_\alpha(r)$}
+This section was already done in Calc7.
+
+\subsubsection{Values for $h(r)$}
+Inserting $H(r)=h(r)$ in (\ref{eq:simpleT}) and (\ref{eq:simpleC}) gives
+
+\begin{align}
+\label{eq:hT} T &= \frac{1}{4\pi r_H} \left( 1 + n - \frac{(2+n) \left(\frac L{r_H}\right)^n}{\left(\frac L{r_H}\right)^n + \left(\frac {r_H}L\right)^2} \right) = \frac 1{4\pi z_H} \frac 1L \left( 1+n - \frac{2+n}{1 + z_H^{2+n}}\right)\\
+\label{eq:hC} C &= -\frac{r_H^{n+2}}{A} \cdot \text{langes zeug} \\
+S_h(z) &= 4 \pi  A L \left(\frac{x^{n+2}}{n+2} + \log
+   (x)\right)_1^z
+\end{align}
+
+
+\section{Questions}
+\begin{itemize}
+\item (Minor) Integral boundaries for $S$
+\item (Major) Propagator calculations: Eq (20) in [N Feb2012] is at least $\propto \frac 1r \partial_r h_{n=0}(r)$. \\ How to extend?
+
+
+\end{itemize}
+
+
+
+\end{document}

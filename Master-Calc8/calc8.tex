@@ -1,0 +1,180 @@
+%& -aux-directory=/tmp
+% sorgt  dafuer dass aux files sonstwohin kommen -output-directory=C:/pdfout
+\documentclass[10pt,a4paper, fleqn]{article}
+% twocol class oder so geht auch
+% fleqn macht align formeln nach lings
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{linktocpage}
+%\usepackage[ngerman]{babel}
+\usepackage{amsmath} % xrightarrow, ...
+\usepackage{cite}
+\usepackage{units} % nicefrac
+\usepackage{datetime} % fuer Uhrzeit im \date
+%\usepackage{wrapfig} % bilder rechts
+\usepackage{caption} % fuer subcaption
+%\usepackage{subcaption} % subfigures
+\usepackage{graphicx} % Bilder allgemein einbinden
+%\usepackage{tabularx} % Tabellen
+\usepackage{lastpage} % Anzahl Seiten
+\usepackage{multicol} % zweispaltige Titelseite
+\usepackage{a4wide} % bessere Papiernutzung
+\usepackage{fancyhdr} % Header/Footer
+%\pagestyle{fancy} % Kopf/Fussbereich der Seiten
+\usepackage{amssymb} % therefore = dreieckdots
+\usepackage{array} % tables
+
+% zweispaltiger Text
+\usepackage{multicol}
+%\setlength{\columnseprule}{0.4pt}
+
+% Ueberschriften kleiner 	
+%\usepackage{titlesec}
+%\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+%\titlespacing{\paragraph}{%
+%  0pt}{%              left margin
+%  0.5\baselineskip}{% space before (vertical)
+%  1em}%               space after (horizontal)
+%%\titlespacing{\section}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\align}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+%\titlespacing{\equation}{0pt}{0.2\baselineskip}{0.1\baselineskip}
+
+% abgefahrenes highlighting von formeln
+\usepackage{xcolor}
+% klappt net, was einfacheres:
+\newcommand{\highlight}[1]{%
+  \colorbox{green!30}{$\displaystyle#1$}}
+
+% Kopfzeile/Fusszeile mit fancy
+%\fancyhead{}
+%\fancyfoot{}
+%\fancyfoot[FL]{\slshape F-Praktikum, Supraleiter}
+%\fancyfoot[FR]{\slshape Page \thepage {} / \pageref*{LastPage}}
+%\renewcommand{\headrulewidth}{0 pt}
+
+% Bibliography
+\bibliographystyle{ieeetr}
+
+% Farben (werden derzeit nur in hypersetup verwendet)
+\usepackage{color}
+\definecolor{darkblue}{rgb}{0,0,.6}
+\definecolor{darkred}{rgb}{.1,0,0}
+\definecolor{darkgreen}{rgb}{0,.5,0}
+
+% Schriften
+% Palatino for rm and math | Helvetica for ss | Courier for tt
+\usepackage{mathpazo} % math & rm
+\linespread{1.05}        % Palatino needs more leading (space between lines)
+\usepackage[scaled]{helvet} % ss
+\usepackage{courier} % tt
+\normalfont
+\usepackage[T1]{fontenc}
+
+% Hyperref aufsetzen
+\hypersetup{
+    pdftitle={Master Physik bei Nicolini, Calc writeup},
+    pdfauthor={Sven Köppel},
+    pdfsubject={master},
+    pdfkeywords={physik} {master} {uni} {frankfurt} {fias},
+    colorlinks=true,        % test: stat gerahmten Links
+    linkcolor=red,          % color of internal links
+    citecolor=darkgreen,    % color of links to bibliography
+    filecolor=darkred,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+% Allgemeine Meta-Daten, derzeit ungenutzt
+\title{\vspace{-9ex} Calc8 \vspace{-1ex}} % vertikalen platz weg...
+\author{\small %
+\href{https://itp.uni-frankfurt.de/~koeppel}{Sven Köppel} \\
+\small \texttt{koeppel@fias.uni-frankfurt.de}}
+\date{\small Generation date: \today, \currenttime}
+
+
+\begin{document}
+\maketitle
+
+% abkuerzungen:
+\renewcommand{\d}{\mathrm{d}}
+\newcommand{\dd}[2]{\frac{\mathrm{d} #1}{\mathrm{d} #2}}
+\renewcommand{\L}{L_P}
+\newcommand{\pr}{p_r}
+\newcommand{\psenk}{p_\perp}
+\newcommand{\ebenso}{\biggl( ~ \therefore ~ \biggr) }
+\newcommand{\metrik}[1]{\d s^2 = \left( #1 \right) \d t^2 \left( #1 \right)^{-1} \d r^2 + r^2 \d \Omega_{D-2}^2 }
+\newcommand{\winkel}{r^2 \d \Omega^2}
+\newcommand{\dann}{$\rightarrow~$}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\A}{\mathcal{A}}
+
+\section{Propagator and modified Einstein Equations}
+
+\subsection{Einstein modifications with NCBHs}
+I got plenty of papers following basically modifications $G\to\mathcal{G}$ or $T_{\mu\nu}\to\mathcal{S}_{\mu\nu}$ or $R\to\mathcal{R}$, e.g.
+
+\begin{equation}
+R_{\mu \nu} - \frac{1}{2} g_{\mu \nu} R = 8 \pi G_N {\mathcal S}_{\mu \nu}
+\quad
+{\mathcal S}_{\mu \nu} = {\mathcal F}^2(\square(x)/\Lambda_G^2) T_{\mu\nu}
+\quad \text{[MMN 2010]}
+\end{equation}
+
+See also
+
+\begin{itemize}
+\item {} [N Feb 2012]: {\it Nonlocal and generalized uncertainty principle black holes} \\
+Introduces the bi-local distribution $\mathcal{A}^2(x-y)$ that modifies $R$, the Einstein Equations, $T_{\mu\nu}$ and $\delta(\vec x)$
+\item{} [Modesto Moffat N Dec 2010]: {\it Black holes in an ultraviolet complete quantum gravity} \\
+Introduces the entire (=holomorphic) function $\mathcal{F}$ that scales like $\mathcal{A}$ before.
+\item {} [Isi Nov2013]: {\it Self-Completeness and the Generalized Uncertainty Principle} \\
+Follows straightforward the [N Feb 2012] formalism.
+\item {} [Isi Feb2014]: {\it Self-Completeness in Alternative Theories of Gracity} \\
+
+\end{itemize}
+
+\subsection{A Roadmap}
+With the approach $\T_{00} \propto M~ \A^{-2}(\square) \delta(\vec x)$, it's all about finding a differential operator that modifies the Dirac Delta to the smeared functions $\partial_r h$ or $\partial_r h_\alpha$. Since our approach always was $T_{00} \propto M/\Omega ~\delta(r) \to M/\Omega \dd{h}{r}$, with
+
+\begin{align}
+h(r) &= \frac{r^2}{r^2 + L^2} \label{eq:holo} \\
+h'(r) &= \frac{2rL^2}{(r^2 + L^2)^2} \\
+h_\alpha(r) &= \frac{r^{3+n}}{(r^\alpha + L^\alpha/2)^{\frac{3+n}{\alpha}}} \label{eq:selfreg} \\
+h'_\alpha(r) &= \frac{(n+3) L^{\alpha } r^{n+2}
+   \left(\frac{L^{\alpha
+   }}{2}+r^{\alpha
+   }\right)^{-\frac{n+3}{\alpha
+   }}}{L^{\alpha }+2 r^{\alpha
+   }} \label{eq:ultimate}
+\end{align}
+
+the propagator $\A^{-2}(\square)$ really must be a complex one to get $\A^{-2} \delta \to h'_\alpha$ (eq. \ref{eq:ultimate})!
+
+
+
+\subsection{Note: Spherical Fourier transformation in $3+n$ dimensions}
+From Felix Karbstein: Performing the Fourier transform of a generic position space potential $V(|\vec r|)$ in $d=3$ dimensions to momentum space, we obtain
+
+\begin{align}
+\hat V(p) &= \int \d^3 r ~e^{-i\vec r \dot \vec p}~ V(r) = 2\pi \int_{-1}^{+1} \d \cos \theta \int_0^\infty \d r ~r^2 ~e^{-i r p \cos \theta} V(r) \\
+&= \frac{2 \pi i}{p} \int_0^\infty \d r ~r ~V(r) \left( e^{-irp} - e^{+irp} \right) = \frac{2\pi i}{p} \int_{-\infty}^\infty \d r ~e^{-irp} ~r ~\left[ V(r) \Theta(r) + V(-r) \Theta(-r) \right]
+\end{align}
+
+with $r=|\vec r|$, $p=|\vec p|$. Note that this effectively amounts to an one dimensional Fourier transform
+
+\begin{equation}
+\hat v(p) = \int_{-\infty}^\infty \d r ~e^{-irp} ~v(r)
+\end{equation}
+
+with
+
+\begin{equation}
+v(r) = r~\left[ V(r) \Theta(r) + V(-r)\Theta(-r)\right]
+\quad\text{and}\quad
+\hat V(p) = \frac{2\pi i}p \hat v(p)
+\end{equation}
+
+Now proceed with going from $\d^3 r \to \d^{3+n} r$
+
+
+
+\end{document}

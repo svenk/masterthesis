@@ -1,0 +1,4 @@
+
+Bibtex aufrufen:
+
+bibtex build/paper
